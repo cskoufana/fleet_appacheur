@@ -1,0 +1,17 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_fleet_rim_user_right,fleet.rim,model_fleet_rim,fleet.group_fleet_user,1,0,0,0
+access_fleet_rim_manager_right,fleet.rim,model_fleet_rim,fleet.group_fleet_manager,1,1,1,1
+access_fleet_consumption_card_type_user_right,fleet.consumption.card.type,model_fleet_consumption_card_type,fleet.group_fleet_user,1,0,0,0
+access_fleet_consumption_card_type_manager_right,fleet.consumption.card.type,model_fleet_consumption_card_type,fleet.group_fleet_manager,1,1,1,1
+access_fleet_consumption_card_user_right,fleet.consumption.card,model_fleet_consumption_card,fleet.group_fleet_user,1,0,0,0
+access_fleet_consumption_card_manager_right,fleet.consumption.card,model_fleet_consumption_card,fleet.group_fleet_manager,1,1,1,1
+access_fleet_consumption_card_log_recharges_user_right,fleet.consumption.card.log.recharges,model_fleet_consumption_card_log_recharges,fleet.group_fleet_user,1,0,0,0
+access_fleet_consumption_card_log_recharges_manager_right,fleet.consumption.card.log.recharges,model_fleet_consumption_card_log_recharges,fleet.group_fleet_manager,1,1,1,0
+access_fleet_move_type_user_right,fleet.move.type,model_fleet_move_type,fleet.group_fleet_user,1,0,0,0
+access_fleet_move_type_manager_right,fleet.move.type,model_fleet_move_type,fleet.group_fleet_manager,1,1,1,1
+access_fleet_passenger,fleet.passenger,model_fleet_passenger,fleet.group_fleet_user,1,1,1,0
+access_fleet_vehicle_log_moves,fleet.vehicle.log.moves,model_fleet_vehicle_log_moves,fleet.group_fleet_user,1,1,1,0
+access_fleet_vehicle_log_incidents,fleet.vehicle.log.incidents,model_fleet_vehicle_log_incidents,fleet.group_fleet_user,1,1,1,0
+access_fleet_vehicle_log_moves_needs,fleet.vehicle.log.moves.needs,model_fleet_vehicle_log_moves_needs,base.group_user,1,1,1,0
+access_fleet_vehicle_assignment,fleet.vehicle.assignment,model_fleet_vehicle_assignment,fleet.group_fleet_user,1,0,0,0
+access_fleet_vehicle_assignment_manager,fleet.vehicle.assignment,model_fleet_vehicle_assignment,fleet.group_fleet_manager,1,1,1,0

@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data noupdate="0">
+
+        <record id="group_fleet_collaborator" model="res.groups">
+            <field name="name">Collaborator</field>
+            <field name="category_id" ref="fleet.module_fleet_category"/>
+        </record>
+
+    </data>
+    <data noupdate="1">
+        <record id="fleet_user_incident_visibility" model="ir.rule">
+            <field name="name">User can only see his/her vehicle's incidents</field>
+            <field name="model_id" ref="model_fleet_vehicle_log_incidents"/>
+            <field name="groups" eval="[(4, ref('fleet.group_fleet_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[('user_id','=',user.id)]</field>
+        </record>
+        <record id="fleet_user_move_visibility" model="ir.rule">
+            <field name="name">User can only see his/her vehicle's moves</field>
+            <field name="model_id" ref="model_fleet_vehicle_log_moves"/>
+            <field name="groups" eval="[(4, ref('fleet.group_fleet_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[('driver_id','=',user.partner_id.id)]</field>
+        </record>
+        <record id="fleet_user_move_visibility_collaborator" model="ir.rule">
+            <field name="name">Collaborator can see log moves</field>
+            <field name="model_id" ref="model_fleet_vehicle_log_moves"/>
+            <field name="groups" eval="[(4, ref('group_fleet_collaborator'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[('user_id','=',user.id)]</field>
+        </record>
+        <record id="fleet_user_need_visibility" model="ir.rule">
+            <field name="name">User can only modify his/her needs</field>
+            <field name="model_id" ref="model_fleet_vehicle_log_moves_needs"/>
+            <!--<field name="groups" eval="[(4, ref('group_fleet_collaborator'))]"/>-->
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[('user_id','=',user.id)]</field>
+        </record>
+
+        <record id="fleet_user_incident_visibility_manager" model="ir.rule">
+            <field name="name">Manager has all rights on vehicle's incidents</field>
+            <field name="model_id" ref="model_fleet_vehicle_log_moves"/>
+            <field name="groups" eval="[(4, ref('fleet.group_fleet_manager'))]"/>
+        </record>
+        <record id="fleet_user_move_visibility_manager" model="ir.rule">
+            <field name="name">Manager has all rights on vehicle's moves</field>
+            <field name="model_id" ref="model_fleet_vehicle_log_moves"/>
+            <field name="groups" eval="[(4, ref('fleet.group_fleet_manager'))]"/>
+        </record>
+        <record id="fleet_user_need_visibility_manager" model="ir.rule">
+            <field name="name">Manager has all rights on needs</field>
+            <field name="model_id" ref="model_fleet_vehicle_log_moves_needs"/>
+            <field name="groups" eval="[(4, ref('fleet.group_fleet_manager'))]"/>
+        </record>
+    </data>
+</openerp>

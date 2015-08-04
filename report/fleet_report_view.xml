@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report id="fleet_vehicle_rml"
+                model="fleet.vehicle"
+                name="vehicle.rml"
+                file="fleet_guce/report/vehicle.rml"
+                string="Information on a vehicle"/>
+
+        <report id="fleet_vehicle_log_moves_rml"
+                model="fleet.vehicle"
+                name="fleet.vehicle.log.moves.rml"
+                file="fleet_guce/report/vehicle_log_moves.rml"
+                string="Moves"/>
+
+        <report id="fleet_vehicle_log_incidents_rml"
+                model="fleet.vehicle"
+                name="fleet.vehicle.log.incidents.rml"
+                file="fleet_guce/report/vehicle_log_incidents.rml"
+                string="Incidents"/>
+
+        <report id="fleet_vehicle_log_services_rml"
+                model="fleet.vehicle"
+                name="fleet.vehicle.log.services.rml"
+                file="fleet_guce/report/vehicle_log_services.rml"
+                string="Services"/>
+
+        <report id="fleet_vehicle_log_costs_rml"
+                model="fleet.vehicle"
+                file="fleet_guce/report/vehicle_log_costs.rml"
+                name="fleet.vehicle.log.services.rml"
+                string="Costs"/>
+
+        <report id="fleet_vehicle_log_fuel_rml"
+                model="fleet.vehicle"
+                file="fleet_guce/report/vehicle_log_fuel.rml"
+                name="fleet.vehicle.log.fuel.rml"
+                string="Fuel Logs"/>
+
+        <report id="fleet_consumption_card_rml"
+                model="fleet.consumption.card"
+                file="fleet_guce/report/consumption_card.rml"
+                name="fleet.consumption.card.rml"
+                string="Consumption Card"/>
+
+        <report id="fleet_consumption_card_log_recharges_rml"
+                model="fleet.consumption.card"
+                file="fleet_guce/report/consumption_card_log_recharges.rml"
+                name="fleet.consumption.card.log.recharges.rml"
+                string="Recharges"/>
+
+        <report id="fleet_consumption_card_card_log_consumptions_rml"
+                model="fleet.consumption.card"
+                file="fleet_guce/report/consumption_card_log_consumptions.rml"
+                name="fleet.consumption.card.log.consumptions.rml"
+                string="Fuel Consumptions"/>
+    </data>
+</openerp>

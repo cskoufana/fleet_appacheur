@@ -1,0 +1,866 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* fleet_guce
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0-20140804-231303\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-24 12:04+0000\n"
+"PO-Revision-Date: 2015-07-24 12:04+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: fleet_guce
+#: field:fleet.vehicle,tire_size:0
+msgid "Tire Size"
+msgstr "Tire Size"
+
+#. module: fleet_guce
+#: view:fleet.vehicle:0
+msgid "show the moves logs for this vehicle"
+msgstr "show the moves logs for this vehicle"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card:0
+msgid "show the recharges for this consumption card"
+msgstr "show the recharges for this consumption card"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.needs,destination:0
+msgid "Destination"
+msgstr "Destination"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.log.recharges:0
+#: view:guce.fleet.consumption.card.recharge:0
+msgid "Recharge Details"
+msgstr "Recharge Details"
+
+#. module: fleet_guce
+#: code:addons/fleet_guce/fleet_guce.py:242
+#, python-format
+msgid "Consumption card balance cant support operation."
+msgstr "Consumption card balance cant support operation."
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.log.recharges:0
+#: view:fleet.vehicle.assignment:0
+#: view:fleet.vehicle.log.incidents:0
+#: view:fleet.vehicle.log.moves:0
+#: view:fleet.vehicle.log.needs:0
+msgid "Group By..."
+msgstr "Group By..."
+
+#. module: fleet_guce
+#: field:fleet.consumption.card.log.recharges,old_value:0
+msgid "Old Value"
+msgstr "Old Value"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.assignment:0
+#: field:fleet.vehicle.assignment,vehicle_id:0
+#: view:fleet.vehicle.log.incidents:0
+#: field:fleet.vehicle.log.incidents,vehicle_id:0
+#: view:fleet.vehicle.log.moves:0
+#: field:fleet.vehicle.log.moves,vehicle_id:0
+msgid "Vehicle"
+msgstr "Vehicle"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card,vendor_id:0
+msgid "Supplier"
+msgstr "Supplier"
+
+#. module: fleet_guce
+#: help:fleet.consumption.card,value:0
+msgid "Value of a card"
+msgstr "Value of a card"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_consumption_card_log_recharges
+msgid "Recharges for cards"
+msgstr "Recharges for cards"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.assignment:0
+msgid "Assignment"
+msgstr "Assignment"
+
+#. module: fleet_guce
+#: selection:fleet.vehicle.log.needs,answer_decision:0
+#: selection:guce.fleet.need.answer,decision:0
+msgid "No"
+msgstr "No"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card,balance:0
+msgid "Current balance"
+msgstr "Current balance"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.incidents:0
+#: field:fleet.vehicle.log.services,incident_id:0
+msgid "Incident"
+msgstr "Incident"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_consumption_card_type
+msgid "Type of consumption card"
+msgstr "Type of consumption card"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.needs,answer_decision:0
+#: field:guce.fleet.need.answer,decision:0
+msgid "Decision"
+msgstr "Decision"
+
+#. module: fleet_guce
+#: field:fleet.vehicle,consumption:0
+msgid "Consumption per 100 km"
+msgstr "Consumption per 100 km"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.assignment:0
+#: field:fleet.vehicle.assignment,note:0
+#: field:fleet.vehicle.log.incidents,note:0
+#: field:fleet.vehicle.log.moves,notes:0
+#: view:fleet.vehicle.log.needs:0
+#: field:fleet.vehicle.log.needs,answer_notes:0
+#: field:fleet.vehicle.log.needs,note:0
+#: field:guce.fleet.need.answer,notes:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: fleet_guce
+#: code:addons/fleet_guce/fleet_guce.py:242
+#, python-format
+msgid "Operation not allowed!"
+msgstr "Operation not allowed!"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card,value:0
+#: field:fleet.consumption.card.log.recharges,value:0
+#: field:guce.fleet.consumption.card.recharge,value:0
+msgid "Value"
+msgstr "Value"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.assignment,old_driver_id:0
+msgid "Old Driver"
+msgstr "Old Driver"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_vehicle_assignment
+msgid "Assignment of drivers to vehicles"
+msgstr "Assignment of drivers to vehicles"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.needs:0
+#: model:ir.actions.act_window,name:fleet_guce.fleet_vehicle_log_needs_act
+#: model:ir.ui.menu,name:fleet_guce.fleet_vehicle_log_needs_menu
+msgid "Needs"
+msgstr "Needs"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.moves:0
+msgid "Register the return"
+msgstr "Register the return"
+
+#. module: fleet_guce
+#: model:ir.actions.act_window,name:fleet_guce.fleet_consumption_card_type_act
+#: model:ir.ui.menu,name:fleet_guce.fleet_consumption_card_type_menu
+msgid "Consumption Cards Types"
+msgstr "Consumption Cards Types"
+
+#. module: fleet_guce
+#: view:fleet.passenger:0
+msgid "Passenger"
+msgstr "Passenger"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.moves:0
+msgid "Move"
+msgstr "Move"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.moves,departure_date:0
+#: field:fleet.vehicle.log.needs,departure_date:0
+msgid "Departure Date"
+msgstr "Departure Date"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card.log.recharges,loader_id:0
+msgid "Loader"
+msgstr "Loader"
+
+#. module: fleet_guce
+#: view:fleet.rim:0
+#: model:ir.actions.act_window,name:fleet_guce.fleet_rim_act
+#: model:ir.ui.menu,name:fleet_guce.fleet_rim_menu
+msgid "Rim"
+msgstr "Rim"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_passenger
+msgid "Passengers for moves"
+msgstr "Passengers for moves"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card:0
+#: field:fleet.vehicle.log.moves,consumption_card_ids:0
+#: model:ir.actions.act_window,name:fleet_guce.fleet_consumption_card_act
+#: model:ir.ui.menu,name:fleet_guce.fleet_consumption_card_menu
+#: model:ir.ui.menu,name:fleet_guce.fleet_consumption_cards
+msgid "Consumption Cards"
+msgstr "Consumption Cards"
+
+#. module: fleet_guce
+#: selection:fleet.vehicle.log.fuel,payment_mode:0
+msgid "By consumption card"
+msgstr "By consumption card"
+
+#. module: fleet_guce
+#: selection:fleet.vehicle.log.incidents,state:0
+#: selection:fleet.vehicle.log.moves,state:0
+msgid "Confirmed"
+msgstr "Confirmed"
+
+#. module: fleet_guce
+#: view:fleet.vehicle:0
+msgid "Consumption card Option"
+msgstr "Consumption card Option"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.incidents:0
+#: view:fleet.vehicle.log.moves:0
+#: view:guce.fleet.consumption.card.recharge:0
+#: view:guce.fleet.need.answer:0
+msgid "Confirm"
+msgstr "Confirm"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card,active:0
+msgid "Is active"
+msgstr "Is active"
+
+#. module: fleet_guce
+#: help:guce.fleet.consumption.card.recharge,value:0
+msgid "Value for the recharge"
+msgstr "Value for the recharge"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.incidents,state:0
+#: field:fleet.vehicle.log.moves,state:0
+#: field:fleet.vehicle.log.needs,state:0
+msgid "State"
+msgstr "State"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.needs,answer_date:0
+msgid "Answer Date"
+msgstr "Answer Date"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.fuel,payment_mode:0
+msgid "Payment Mode"
+msgstr "Payment Mode"
+
+#. module: fleet_guce
+#: code:addons/fleet_guce/fleet_guce.py:232
+#: constraint:fleet.vehicle.log.fuel:0
+#, python-format
+msgid "\n"
+"Total amount and price per liter must be positive.\n"
+"Total amount must be higher than price per liter"
+msgstr "\n"
+"Total amount and price per liter must be positive.\n"
+"Total amount must be higher than price per liter"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_vehicle_log_incidents
+msgid "Incident logs for vehicles"
+msgstr "Incident logs for vehicles"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_guce_fleet_need_answer
+msgid "guce.fleet.need.answer"
+msgstr "guce.fleet.need.answer"
+
+#. module: fleet_guce
+#: model:ir.ui.menu,name:fleet_guce.fleet_vehicle_log_needs
+msgid "Output Needs"
+msgstr "Output Needs"
+
+#. module: fleet_guce
+#: model:ir.actions.act_window,name:fleet_guce.fleet_move_type_act
+#: model:ir.ui.menu,name:fleet_guce.fleet_move_type_menu
+msgid "Move Types"
+msgstr "Move Types"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_vehicle_log_fuel
+msgid "Fuel log for vehicles"
+msgstr "Fuel log for vehicles"
+
+#. module: fleet_guce
+#: sql_constraint:fleet.move.type:0
+msgid "Move type name already exists"
+msgstr "Move type name already exists"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card.log.recharges,recharge_date:0
+msgid "Recharge Date"
+msgstr "Recharge Date"
+
+#. module: fleet_guce
+#: field:fleet.vehicle,rim_id:0
+msgid "Rim Type"
+msgstr "Rim Type"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.assignment,driver_id:0
+msgid "New Driver"
+msgstr "New Driver"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.moves,move_order_ref:0
+msgid "Order Reference"
+msgstr "Order Reference"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.needs,seats:0
+msgid "Seats Number"
+msgstr "Seats Number"
+
+#. module: fleet_guce
+#: field:fleet.passenger,identity_card_number:0
+msgid "Identity Card Number"
+msgstr "Identity Card Number"
+
+#. module: fleet_guce
+#: model:ir.actions.act_window,name:fleet_guce.fleet_consumption_card_log_recharges_act
+#: model:ir.ui.menu,name:fleet_guce.fleet_consumption_card_log_recharges_menu
+msgid "Recharges Logs"
+msgstr "Recharges Logs"
+
+#. module: fleet_guce
+#: field:fleet.vehicle,tank_capacity:0
+msgid "Tank Capacity"
+msgstr "Tank Capacity"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_rim
+msgid "Rim of vehicle"
+msgstr "Rim of vehicle"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.moves:0
+msgid "Departure"
+msgstr "Departure"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.type:0
+msgid "Consumption card type"
+msgstr "Consumption card type"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.moves,departure_place:0
+msgid "Departure Place"
+msgstr "Departure Place"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card.log.recharges,order_ref:0
+#: field:guce.fleet.consumption.card.recharge,order_ref:0
+msgid "Recharge Order Reference"
+msgstr "Recharge Order Reference"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_vehicle_log_moves
+msgid "Moves for vehicles"
+msgstr "Moves for vehicles"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card:0
+#: field:fleet.consumption.card.log.recharges,consumption_card_id:0
+#: field:fleet.vehicle,consumption_card_id:0
+#: field:fleet.vehicle.log.fuel,consumption_card_id:0
+msgid "Consumption Card"
+msgstr "Consumption Card"
+
+#. module: fleet_guce
+#: help:fleet.vehicle,sale_date:0
+msgid "Date when the vehicle has been sold"
+msgstr "Date when the vehicle has been sold"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card:0
+msgid "View Consumptions"
+msgstr "View Consumptions"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_move_type
+msgid "Moves types related to vehicles"
+msgstr "Moves types related to vehicles"
+
+#. module: fleet_guce
+#: sql_constraint:fleet.passenger:0
+msgid "Passenger name already exists"
+msgstr "Passenger name already exists"
+
+#. module: fleet_guce
+#: selection:fleet.vehicle.log.needs,answer_decision:0
+#: selection:guce.fleet.need.answer,decision:0
+msgid "Yes"
+msgstr "Yes"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.log.recharges:0
+#: view:guce.fleet.consumption.card.recharge:0
+msgid "Recharge"
+msgstr "Recharge"
+
+#. module: fleet_guce
+#: help:fleet.consumption.card.log.recharges,old_value:0
+msgid "Value of the card before the recharge"
+msgstr "Value of the card before the recharge"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card:0
+#: model:ir.actions.act_window,name:fleet_guce.guce_fleet_consumption_card_recharge_act
+msgid "New Recharge"
+msgstr "New Recharge"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.moves,object:0
+msgid "Object"
+msgstr "Object"
+
+#. module: fleet_guce
+#: help:fleet.consumption.card,critical_balance:0
+msgid "The critical balance is used to notify for new recharge of a card"
+msgstr "The critical balance is used to notify for new recharge of a card"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.incidents:0
+msgid "Odometer Detail"
+msgstr "Odometer Detail"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card,card_type_id:0
+msgid "Card Type"
+msgstr "Card Type"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card,security_code:0
+msgid "Security Code"
+msgstr "Security Code"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.needs:0
+msgid "Answer to this need"
+msgstr "Answer to this need"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.needs:0
+msgid "Detail"
+msgstr "Detail"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.incidents:0
+#: view:fleet.vehicle.log.moves:0
+msgid "Note"
+msgstr "Note"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_vehicle_log_services
+msgid "Services for vehicles"
+msgstr "Services for vehicles"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.incidents:0
+#: selection:fleet.vehicle.log.incidents,state:0
+#: view:fleet.vehicle.log.moves:0
+#: selection:fleet.vehicle.log.moves,state:0
+#: selection:fleet.vehicle.log.needs,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.log.recharges:0
+#: view:fleet.vehicle:0
+#: view:fleet.vehicle.log.fuel:0
+#: view:fleet.vehicle.log.incidents:0
+#: view:fleet.vehicle.log.moves:0
+#: view:fleet.vehicle.log.needs:0
+#: view:fleet.vehicle.log.services:0
+msgid "Attachment"
+msgstr "Attachment"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.needs:0
+#: view:guce.fleet.need.answer:0
+#: model:ir.actions.act_window,name:fleet_guce.guce_fleet_need_answer_act
+msgid "Answer"
+msgstr "Answer"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.moves,back_date:0
+msgid "Back Date"
+msgstr "Back Date"
+
+#. module: fleet_guce
+#: help:fleet.vehicle.log.incidents,odometer:0
+#: help:fleet.vehicle.log.moves,odometer:0
+#: help:fleet.vehicle.log.moves,odometer_back:0
+msgid "Odometer measure of the vehicle at the moment of this log"
+msgstr "Odometer measure of the vehicle at the moment of this log"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.assignment:0
+#: view:fleet.vehicle.log.moves:0
+#: field:fleet.vehicle.log.moves,driver_id:0
+msgid "Driver"
+msgstr "Driver"
+
+#. module: fleet_guce
+#: help:fleet.consumption.card.log.recharges,value:0
+msgid "Value of a recharge"
+msgstr "Value of a recharge"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.incidents,user_id:0
+#: view:fleet.vehicle.log.needs:0
+#: field:fleet.vehicle.log.needs,user_id:0
+msgid "User"
+msgstr "User"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_vehicle_log_needs
+msgid "Needs logs"
+msgstr "Needs logs"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.log.recharges:0
+#: view:fleet.vehicle.assignment:0
+#: field:fleet.vehicle.log.incidents,date:0
+#: field:fleet.vehicle.log.moves,date:0
+#: view:fleet.vehicle.log.needs:0
+msgid "Date"
+msgstr "Date"
+
+#. module: fleet_guce
+#: help:fleet.vehicle,sale_amount:0
+msgid "Sale Amount for the vehicle"
+msgstr "Sale Amount for the vehicle"
+
+#. module: fleet_guce
+#: view:fleet.move.type:0
+#: field:fleet.vehicle.log.moves,move_type_id:0
+msgid "Move Type"
+msgstr "Move Type"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.type:0
+msgid "Consumption cards types"
+msgstr "Consumption cards types"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card,name:0
+msgid "Card Number"
+msgstr "Card Number"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.assignment:0
+#: model:ir.actions.act_window,name:fleet_guce.fleet_vehicle_assignment_act
+#: model:ir.ui.menu,name:fleet_guce.fleet_vehicle_assignment_menu
+#: model:ir.ui.menu,name:fleet_guce.fleet_vehicle_assignments
+msgid "Assignments"
+msgstr "Assignments"
+
+#. module: fleet_guce
+#: view:fleet.vehicle:0
+#: view:fleet.vehicle.log.incidents:0
+#: model:ir.actions.act_window,name:fleet_guce.fleet_vehicle_log_incidents_act
+#: model:ir.ui.menu,name:fleet_guce.fleet_vehicle_log_incidents_menu
+msgid "Incidents"
+msgstr "Incidents"
+
+#. module: fleet_guce
+#: sql_constraint:fleet.rim:0
+msgid "Rim name already exists"
+msgstr "Rim name already exists"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.incidents,odometer_id:0
+#: field:fleet.vehicle.log.moves,odometer_back_id:0
+#: field:fleet.vehicle.log.moves,odometer_id:0
+msgid "Odometer"
+msgstr "Odometer"
+
+#. module: fleet_guce
+#: help:fleet.consumption.card.log.recharges,recharge_date:0
+msgid "Date when the recharge has been realized"
+msgstr "Date when the recharge has been realized"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card,recharge_ids:0
+#: view:fleet.consumption.card.log.recharges:0
+msgid "Recharges"
+msgstr "Recharges"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.log.recharges:0
+#: field:fleet.consumption.card.log.recharges,attachment_ids:0
+#: view:fleet.vehicle:0
+#: field:fleet.vehicle,attachment_ids:0
+#: view:fleet.vehicle.log.fuel:0
+#: field:fleet.vehicle.log.fuel,attachment_ids:0
+#: view:fleet.vehicle.log.incidents:0
+#: field:fleet.vehicle.log.incidents,attachment_ids:0
+#: view:fleet.vehicle.log.moves:0
+#: field:fleet.vehicle.log.moves,attachment_ids:0
+#: view:fleet.vehicle.log.needs:0
+#: field:fleet.vehicle.log.needs,attachment_ids:0
+#: view:fleet.vehicle.log.services:0
+#: field:fleet.vehicle.log.services,attachment_ids:0
+msgid "Attachments"
+msgstr "Attachments"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.moves:0
+msgid "General information"
+msgstr "General information"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.assignment,assignment_date:0
+msgid "Assignment Date"
+msgstr "Assignment Date"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.incidents:0
+#: selection:fleet.vehicle.log.incidents,state:0
+#: selection:fleet.vehicle.log.moves,state:0
+msgid "Done"
+msgstr "Done"
+
+#. module: fleet_guce
+#: view:guce.fleet.consumption.card.recharge:0
+#: view:guce.fleet.need.answer:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: fleet_guce
+#: view:fleet.vehicle:0
+#: view:fleet.vehicle.log.moves:0
+#: model:ir.actions.act_window,name:fleet_guce.fleet_vehicle_log_moves_act
+#: model:ir.ui.menu,name:fleet_guce.fleet_vehicle_log_moves_menu
+msgid "Moves"
+msgstr "Moves"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.incidents,odometer_unit:0
+#: field:fleet.vehicle.log.moves,odometer_back_unit:0
+#: field:fleet.vehicle.log.moves,odometer_unit:0
+msgid "Unit"
+msgstr "Unit"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_consumption_card
+msgid "Consumption card for a vehicle"
+msgstr "Consumption card for a vehicle"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.log.recharges:0
+msgid "Consumption card"
+msgstr "Consumption card"
+
+#. module: fleet_guce
+#: field:fleet.vehicle,sale_date:0
+msgid "Sale Date"
+msgstr "Sale Date"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.needs,answerer:0
+msgid "Answerer"
+msgstr "Answerer"
+
+#. module: fleet_guce
+#: field:fleet.vehicle,log_moves:0
+msgid "Moves Logs"
+msgstr "Moves Logs"
+
+#. module: fleet_guce
+#: selection:fleet.vehicle.log.needs,state:0
+msgid "Answered"
+msgstr "Answered"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.incidents:0
+msgid "Details"
+msgstr "Details"
+
+#. module: fleet_guce
+#: help:fleet.consumption.card,balance:0
+msgid "The current balance of a card"
+msgstr "The current balance of a card"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_guce_fleet_consumption_card_recharge
+msgid "guce.fleet.consumption.card.recharge"
+msgstr "guce.fleet.consumption.card.recharge"
+
+#. module: fleet_guce
+#: sql_constraint:fleet.consumption.card.type:0
+msgid "Consumption card type name already exists"
+msgstr "Consumption card type name already exists"
+
+#. module: fleet_guce
+#: field:fleet.vehicle,consumption_card_ids:0
+msgid "Consumption cards"
+msgstr "Consumption cards"
+
+#. module: fleet_guce
+#: view:fleet.vehicle:0
+msgid "show the incidents logs for this vehicle"
+msgstr "show the incidents logs for this vehicle"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.moves,arrival_place:0
+msgid "Destination Place"
+msgstr "Destination Place"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.moves:0
+msgid "Return"
+msgstr "Return"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.log.recharges:0
+#: field:fleet.consumption.card.log.recharges,description:0
+#: field:fleet.consumption.card.type,description:0
+#: field:fleet.move.type,description:0
+#: field:fleet.rim,description:0
+#: view:guce.fleet.consumption.card.recharge:0
+#: field:guce.fleet.consumption.card.recharge,description:0
+msgid "Description"
+msgstr "Description"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card.log.recharges:0
+msgid "Price"
+msgstr "Price"
+
+#. module: fleet_guce
+#: field:fleet.vehicle,log_incidents:0
+msgid "Incidents Logs"
+msgstr "Incidents Logs"
+
+#. module: fleet_guce
+#: field:fleet.vehicle,sale_amount:0
+msgid "Sale Amount"
+msgstr "Sale Amount"
+
+#. module: fleet_guce
+#: help:fleet.vehicle.log.fuel,payment_mode:0
+msgid "Payment mode for fuel consumption"
+msgstr "Payment mode for fuel consumption"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card.type,name:0
+#: field:fleet.move.type,name:0
+#: field:fleet.passenger,name:0
+#: field:fleet.rim,name:0
+#: field:fleet.vehicle.assignment,name:0
+#: field:fleet.vehicle.log.incidents,name:0
+#: field:fleet.vehicle.log.moves,name:0
+#: field:fleet.vehicle.log.needs,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: fleet_guce
+#: view:fleet.move.type:0
+msgid "Move types"
+msgstr "Move types"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.incidents:0
+msgid "Vehicles Incidents"
+msgstr "Vehicles Incidents"
+
+#. module: fleet_guce
+#: selection:fleet.vehicle.log.fuel,payment_mode:0
+msgid "Cash"
+msgstr "Cash"
+
+#. module: fleet_guce
+#: view:guce.fleet.need.answer:0
+msgid "Answer to the need request."
+msgstr "Answer to the need request."
+
+#. module: fleet_guce
+#: view:fleet.consumption.card:0
+msgid "View Recharges"
+msgstr "View Recharges"
+
+#. module: fleet_guce
+#: view:fleet.passenger:0
+#: view:fleet.vehicle.log.moves:0
+#: field:fleet.vehicle.log.moves,passenger_ids:0
+#: model:ir.actions.act_window,name:fleet_guce.fleet_passenger_act
+#: model:ir.ui.menu,name:fleet_guce.fleet_passenger_menu
+msgid "Passengers"
+msgstr "Passengers"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_vehicle
+msgid "Information on a vehicle"
+msgstr "Information on a vehicle"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.needs,need_date:0
+msgid "Need Date"
+msgstr "Need Date"
+
+#. module: fleet_guce
+#: help:fleet.consumption.card,active:0
+msgid "Check if card is activated"
+msgstr "Check if card is activated"
+
+#. module: fleet_guce
+#: help:fleet.vehicle.log.needs,seats:0
+msgid "Number of seats needed"
+msgstr "Number of seats needed"
+
+#. module: fleet_guce
+#: help:fleet.vehicle.log.moves,date:0
+msgid "Date of logging record"
+msgstr "Date of logging record"
+
+#. module: fleet_guce
+#: field:fleet.consumption.card,critical_balance:0
+msgid "Critical Balance"
+msgstr "Critical Balance"
+
+#. module: fleet_guce
+#: view:guce.fleet.consumption.card.recharge:0
+#: view:guce.fleet.need.answer:0
+msgid "or"
+msgstr "or"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.incidents,odometer:0
+#: field:fleet.vehicle.log.moves,odometer:0
+#: field:fleet.vehicle.log.moves,odometer_back:0
+msgid "Odometer Value"
+msgstr "Odometer Value"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.needs:0
+msgid "Need"
+msgstr "Need"
+

@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <!--Workflow for vehicles moves-->
+        <record model="workflow" id="fleet_vehicle_log_moves_wkf">
+            <field name="name">fleet.vehicle.log.moves.wkf</field>
+            <field name="osv">fleet.vehicle.log.moves</field>
+            <field name="on_create" eval="1"/>
+        </record>
+        <!--Activity-->
+        <record model="workflow.activity" id="fleet_vehicle_log_moves_act_draft">
+            <field name="wkf_id" ref="fleet_vehicle_log_moves_wkf"/>
+            <field name="flow_start" eval='True'/>
+            <field name="name">draft</field>
+            <field name="kind">function</field>
+            <field name="action">action_draft()</field>
+        </record>
+        <record model="workflow.activity" id="fleet_vehicle_log_moves_act_confirmed">
+            <field name="wkf_id" ref="fleet_vehicle_log_moves_wkf"/>
+            <field name="name">confirmed</field>
+            <field name="kind">function</field>
+            <field name="action">action_confirmed()</field>
+        </record>
+        <record model="workflow.activity" id="fleet_vehicle_log_moves_act_done">
+            <field name="wkf_id" ref="fleet_vehicle_log_moves_wkf"/>
+            <field name="flow_stop" eval="True"/>
+            <field name="name">done</field>
+            <field name="kind">function</field>
+            <field name="action">action_done()</field>
+        </record>
+        <!--Transition-->
+        <record model="workflow.transition" id="fleet_vehicle_log_moves_wkf_tt_draft_confirmed">
+            <field name="act_from" ref="fleet_vehicle_log_moves_act_draft"/>
+            <field name="act_to" ref="fleet_vehicle_log_moves_act_confirmed"/>
+            <field name="signal">btn_action_confirm_moves</field>
+            <field name="condition">1==1</field>
+        </record>
+        <record model="workflow.transition" id="fleet_vehicle_log_moves_wkf_tt_confirmed_done">
+            <field name="act_from" ref="fleet_vehicle_log_moves_act_confirmed"/>
+            <field name="act_to" ref="fleet_vehicle_log_moves_act_done"/>
+            <field name="signal">btn_action_done_moves</field>
+            <field name="condition">1==1</field>
+        </record>
+
+        <!--Workflow for vehicles incidents-->
+        <record model="workflow" id="fleet_vehicle_log_incidents_wkf">
+            <field name="name">fleet.vehicle.log.incidents.wkf</field>
+            <field name="osv">fleet.vehicle.log.incidents</field>
+            <field name="on_create" eval="1"/>
+        </record>
+        <!--Activity-->
+        <record model="workflow.activity" id="fleet_vehicle_log_incidents_act_draft">
+            <field name="wkf_id" ref="fleet_vehicle_log_incidents_wkf"/>
+            <field name="flow_start" eval='True'/>
+            <field name="name">draft</field>
+            <field name="kind">function</field>
+            <field name="action">action_draft()</field>
+        </record>
+        <record model="workflow.activity" id="fleet_vehicle_log_incidents_act_confirmed">
+            <field name="wkf_id" ref="fleet_vehicle_log_incidents_wkf"/>
+            <field name="name">confirmed</field>
+            <field name="kind">function</field>
+            <field name="action">action_confirmed()</field>
+        </record>
+        <record model="workflow.activity" id="fleet_vehicle_log_incidents_act_done">
+            <field name="wkf_id" ref="fleet_vehicle_log_incidents_wkf"/>
+            <field name="flow_stop" eval="True"/>
+            <field name="name">done</field>
+            <field name="kind">function</field>
+            <field name="action">action_done()</field>
+        </record>
+        <!--Transition-->
+        <record model="workflow.transition" id="fleet_vehicle_log_incidents_wkf_tt_draft_confirmed">
+            <field name="act_from" ref="fleet_vehicle_log_incidents_act_draft"/>
+            <field name="act_to" ref="fleet_vehicle_log_incidents_act_confirmed"/>
+            <field name="signal">btn_action_confirm_incidents</field>
+            <field name="condition">1==1</field>
+        </record>
+        <record model="workflow.transition" id="fleet_vehicle_log_incidents_wkf_tt_confirmed_done">
+            <field name="act_from" ref="fleet_vehicle_log_incidents_act_confirmed"/>
+            <field name="act_to" ref="fleet_vehicle_log_incidents_act_done"/>
+            <field name="signal">btn_action_done_incidents</field>
+            <field name="condition">1==1</field>
+        </record>
+    </data>
+</openerp>

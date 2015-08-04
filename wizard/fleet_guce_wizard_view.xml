@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="guce_fleet_consumption_card_recharge_form">
+            <field name="name">guce.fleet.consumption.card.recharge.form</field>
+            <field name="model">guce.fleet.consumption.card.recharge</field>
+            <field name="arch" type="xml">
+                <form string="Recharge" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="order_ref" class="oe_edit_only"/>
+                            <h1>
+                                <field name="order_ref" nolabel="1" required="1"/>
+                            </h1>
+                        </div>
+                        <group col="2">
+                            <group col="2" string="Recharge Details">
+                                <field name="value"/>
+                            </group>
+                            <group string="Description">
+                                <field name="description" nolabel="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_validate" string="Confirm" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="guce_fleet_consumption_card_recharge_act">
+            <field name="name">New Recharge</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">guce.fleet.consumption.card.recharge</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.ui.view" id="fleet_consumption_card_form1">
+            <field name="name">fleet.consumption.card.form1</field>
+            <field name="model">fleet.consumption.card</field>
+            <field name="inherit_id" ref="fleet_consumption_card_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header" position="inside">
+                    <button name="%(guce_fleet_consumption_card_recharge_act)d" string="New Recharge"
+                            class="oe_highlight" type="action" groups="fleet.group_fleet_manager"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="guce_fleet_need_answer_form">
+            <field name="name">guce.fleet.need.answer.form</field>
+            <field name="model">guce.fleet.need.answer</field>
+            <field name="arch" type="xml">
+                <form string="Answer" version="7.0">
+                    <sheet>
+                        <p class="oe_grey">
+                            Answer to the need request.
+                        </p>
+                        <group col="2">
+                            <group col="2" string="Decision">
+                                <field name="decision" required="1"/>
+                            </group>
+                            <group col="2" string="Notes">
+                                <field name="notes" attrs="{'required': [('decision','=','no')]}" nolabel="1"/>
+                            </group>
+                        </group>
+                        <notebook attrs="{'invisible': [('decision', '!=', 'yes')]}">
+                            <page string="Move">
+                                <group col="4" string="General information">
+                                    <field name="vehicle_id" on_change="on_change_vehicle(vehicle_id)"/>
+                                    <field name="driver_id"/>
+                                    <field name="move_type_id"/>
+                                    <field name="move_order_ref"/>
+                                    <field name="object"/>
+                                </group>
+                                <group col="2" string="Departure">
+                                    <field name="departure_date"/>
+                                    <field name="departure_place"/>
+                                    <field name="arrival_place"/>
+                                </group>
+                                <separator string="Description" colspan="4"/>
+                                <field name="description" nolabel="1" colspan="4"/>
+                                <notebook>
+                                    <page string="Passengers">
+                                        <field name="passenger_ids" widget="one2many_list"/>
+                                    </page>
+                                    <page string="Other Passengers">
+                                        <field name="other_passenger_ids" nolabel="1" widget="one2many_list">
+                                            <tree version="7.0" editable="bottom">
+                                                <field name="name" required="1"/>
+                                                <field name="identity_card_number"/>
+                                            </tree>
+                                        </field>
+                                    </page>
+                                </notebook>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <footer>
+                        <button name="action_validate" string="Confirm" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="guce_fleet_need_answer_act">
+            <field name="name">Answer</field>
+            <field name="res_model">guce.fleet.need.answer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <record model="ir.ui.view" id="fleet_vehicle_log_moves_needs_form1">
+            <field name="name">fleet.vehicle.log.moves.needs.form1</field>
+            <field name="model">fleet.vehicle.log.moves.needs</field>
+            <field name="inherit_id" ref="fleet_vehicle_log_moves_needs_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header" position="inside">
+                    <button name="%(guce_fleet_need_answer_act)d" string="Answer to this need" class="oe_highlight"
+                            type="action" groups="fleet.group_fleet_manager" states="submitted"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="flee_vehicle_log_moves_confirm" model="ir.ui.view">
+            <field name="name">fleet.vehicle.log.moves.confirm</field>
+            <field name="model">fleet.vehicle.log.moves.confirm</field>
+            <field name="arch" type="xml">
+                <form string="Confirm move" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <label string="Confirm moves"/>
+                        </div>
+                        <group col="4">
+                            <field name="departure_date" required="1" readonly="1"/>
+                            <label for="odometer"/>
+                            <div>
+                                <field name="odometer" nolabel="0" required="1" class="oe_inline"/>
+                                <field name="odometer_unit" class="oe_inline"/>
+                            </div>
+
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_validate" string="Confirm" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="fleet_vehicle_log_moves_confirm_act">
+            <field name="name">Confirm Move</field>
+            <field name="res_model">fleet.vehicle.log.moves.confirm</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <record model="ir.ui.view" id="fleet_vehicle_log_moves_form1">
+            <field name="name">fleet.vehicle.log.moves.form1</field>
+            <field name="model">fleet.vehicle.log.moves</field>
+            <field name="inherit_id" ref="fleet_vehicle_log_moves_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header" position="inside">
+                    <button name="%(fleet_vehicle_log_moves_confirm_act)d" string="Confirm" class="oe_highlight"
+                            type="action" groups="fleet.group_fleet_user" states="draft"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
