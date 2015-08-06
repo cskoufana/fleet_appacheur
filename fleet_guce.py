@@ -90,7 +90,8 @@ class fleet_consumption_card(osv.osv):
         return result
 
     def scheduler_manage_critical_balance(self, cr, uid, context=None):
-        ids = self.search(cr, uid, [('balance', '<=', 'critical_balance')], offset=0, limit=None, order=None, context=context)
+        cr.execute('select card.id from fleet_consumption_card card where card.balance <= card.critical_balance')
+        ids = [x[0] for x in cr.fetchall()]
         for record in self.browse(cr, uid, ids, context):
             self.message_post(cr, uid, [record.id], body=_('Current balance %s of the card is lower than critical balance %s.\nPlease reload the card!') % (record.balance, record.critical_balance))
         return True
