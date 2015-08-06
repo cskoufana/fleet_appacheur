@@ -14,6 +14,7 @@
     'data': [
         'fleet_guce_view.xml',
         'fleet_guce_workflow.xml',
+        'fleet_guce_data.xml',
         'wizard/fleet_guce_wizard_view.xml',
     ],
     'update_xml': ['security/fleet_guce_security.xml', 'security/ir.model.access.csv', 'report/fleet_report_view.xml'],

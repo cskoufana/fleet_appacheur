@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0-20140804-231303\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 14:24+0000\n"
-"PO-Revision-Date: 2015-08-03 14:24+0000\n"
+"POT-Creation-Date: 2015-08-05 14:45+0000\n"
+"PO-Revision-Date: 2015-08-05 14:45+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr "Inconnu"
 #. module: fleet
 #: view:fleet.vehicle.log.services:0
 msgid "Write here any other information related to the service completed."
-msgstr "Inscrivez ici toute autre information relative à l'intervention réalisée."
+msgstr "Inscrivez ici toute autre information relative à l'intervention terminée."
 
 #. module: fleet
 #: view:fleet.vehicle.cost:0
@@ -88,17 +88,27 @@ msgstr "Diagnostique du système de charge"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_19
 msgid "Engine Coolant Replacement"
-msgstr "Replacement du liquide de refroidissement"
+msgstr "Replacement du moteur de refroidissement"
 
 #. module: fleet
 #: help:fleet.vehicle.cost,parent_id:0
 msgid "Parent cost to this current cost"
 msgstr "Centre de coût parent à celui-ci"
 
+#. module: fleet_guce
+#: report:fleet.vehicle.log.fuel.rml:0
+msgid "FUEL LOGS FOR VEHICLE"
+msgstr "HISTORIQUE DES CONSOMMATIONS DE CARBURANT POUR LE VEHICULE"
+
 #. module: fleet
 #: help:fleet.vehicle.log.contract,cost_frequency:0
 msgid "Frequency of the recuring cost"
 msgstr "Fréquence de récurrence de ce coût"
+
+#. module: fleet_guce
+#: field:fleet.vehicle.log.moves.confirm,departure_date:0
+msgid "Effective Departure Date"
+msgstr "Date effective de départ"
 
 #. module: fleet
 #: model:ir.actions.act_window,name:fleet.fleet_vehicle_act
@@ -107,11 +117,21 @@ msgstr "Fréquence de récurrence de ce coût"
 msgid "Vehicles"
 msgstr "Véhicules"
 
+#. module: fleet_guce
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.consumption.card.log.recharges.rml:0
+#: report:fleet.consumption.card.rml:0
+msgid "Current Balance"
+msgstr "Solde courrant"
+
 #. modules: fleet, fleet_guce
 #: field:fleet.vehicle.log.contract,cost_amount:0
 #: field:fleet.vehicle.log.fuel,cost_amount:0
 #: field:fleet.vehicle.log.services,cost_amount:0
 #: field:fleet.consumption.card,value:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.consumption.card.log.recharges.rml:0
+#: report:fleet.consumption.card.rml:0
 #: report:vehicle.rml:0
 msgid "Amount"
 msgstr "Montant"
@@ -207,8 +227,11 @@ msgstr "État"
 msgid "Has Contracts Overdued"
 msgstr "Has Contracts Overdued"
 
-#. module: fleet
+#. modules: fleet, fleet_guce
 #: field:fleet.vehicle.cost,amount:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.vehicle.log.fuel.rml:0
+#: report:fleet.vehicle.log.services.rml:0
 msgid "Total Price"
 msgstr "Prix total"
 
@@ -221,6 +244,11 @@ msgstr "Refaire le plein d'essence"
 #: model:fleet.vehicle.tag,name:fleet.vehicle_tag_sedan
 msgid "Sedan"
 msgstr "Sedan"
+
+#. module: fleet_guce
+#: model:ir.model,name:fleet_guce.model_fleet_vehicle_log_moves_confirm
+msgid "fleet.vehicle.log.moves.confirm"
+msgstr "fleet.vehicle.log.moves.confirm"
 
 #. module: fleet
 #: selection:fleet.vehicle,fuel_type:0
@@ -263,6 +291,7 @@ msgstr "Autres passagers"
 
 #. module: fleet_guce
 #: field:fleet.consumption.card.log.recharges,order_ref:0
+#: report:fleet.consumption.card.log.recharges.rml:0
 #: field:guce.fleet.consumption.card.recharge,order_ref:0
 msgid "Recharge Order Reference"
 msgstr "Référence de l'ordre de recharge"
@@ -277,6 +306,7 @@ msgstr "Autre maintenance"
 #: field:fleet.consumption.card.log.recharges,consumption_card_id:0
 #: field:fleet.vehicle,consumption_card_id:0
 #: field:fleet.vehicle.log.fuel,consumption_card_id:0
+#: model:ir.actions.report.xml,name:fleet_guce.fleet_consumption_card_rml
 msgid "Consumption Card"
 msgstr "Carte de consommation"
 
@@ -324,7 +354,12 @@ msgstr "Ce champ contient l'image utilisé comme logo de la marque, limitée à 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_service_11
 msgid "Management Fee"
-msgstr "Gestion des dépenses"
+msgstr "Management Fee"
+
+#. module: fleet_guce
+#: view:fleet.vehicle.log.moves.needs:0
+msgid "Show the planned move"
+msgstr "Afficher le déplacement"
 
 #. module: fleet
 #: view:fleet.vehicle.log.fuel:0
@@ -348,6 +383,11 @@ msgstr "Clôturer le contrat"
 #: model:ir.actions.act_window,name:fleet_guce.guce_fleet_need_answer_act
 msgid "Answer"
 msgstr "Réponse"
+
+#. module: fleet_guce
+#: report:fleet.vehicle.log.moves.rml:0
+msgid "Return Date / Odometer"
+msgstr "Date de retour / Kilométrage"
 
 #. module: fleet
 #: field:fleet.vehicle.log.contract,state:0
@@ -379,6 +419,7 @@ msgstr "Voir les relevés kilométriques de ce vehicule"
 #: view:fleet.vehicle.assignment:0
 #: view:fleet.vehicle.log.moves:0
 #: field:fleet.vehicle.log.moves,driver_id:0
+#: report:fleet.vehicle.log.moves.rml:0
 #: field:guce.fleet.need.answer,driver_id:0
 #: report:vehicle.rml:0
 msgid "Driver"
@@ -412,7 +453,7 @@ msgstr "Omnium"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_4
 msgid "A/C Evaporator Replacement"
-msgstr "Replacement de l'évaporateur"
+msgstr "A/C Evaporator Replacement"
 
 #. module: fleet
 #: field:fleet.vehicle,message_summary:0
@@ -427,6 +468,12 @@ msgstr "Résumé"
 msgid "Assignments"
 msgstr "Affectations"
 
+#. module: fleet_guce
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.consumption.card.log.recharges.rml:0
+msgid "Card Properties"
+msgstr "Card Properties"
+
 #. module: fleet
 #: view:fleet.vehicle:0
 msgid "show all the costs for this vehicle"
@@ -436,6 +483,7 @@ msgstr "Voir toutes les dépenses du véhicule"
 #: view:fleet.vehicle:0
 #: view:fleet.vehicle.log.incidents:0
 #: model:ir.actions.act_window,name:fleet_guce.fleet_vehicle_log_incidents_act
+#: model:ir.actions.report.xml,name:fleet_guce.fleet_vehicle_log_incidents_rml
 #: model:ir.ui.menu,name:fleet_guce.fleet_vehicle_log_incidents_menu
 msgid "Incidents"
 msgstr "Incidents"
@@ -514,7 +562,7 @@ msgstr "Collaborateur"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_29
 msgid "Ignition Coil Replacement"
-msgstr "Replacement de la bobine d'allumage"
+msgstr "Ignition Coil Replacement"
 
 #. module: fleet
 #: field:fleet.vehicle.cost,cost_ids:0
@@ -593,10 +641,14 @@ msgstr "<p class=\"oe_view_nocontent_create\">\n"
 
 #. module: fleet_guce
 #: field:fleet.consumption.card,critical_balance:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.consumption.card.log.recharges.rml:0
+#: report:fleet.consumption.card.rml:0
 msgid "Critical Balance"
 msgstr "Solde critique"
 
 #. module: fleet_guce
+#: view:fleet.vehicle.log.moves.confirm:0
 #: view:guce.fleet.consumption.card.recharge:0
 #: view:guce.fleet.need.answer:0
 msgid "or"
@@ -643,6 +695,11 @@ msgstr "Jantes du véhicule"
 #: field:fleet.vehicle.log.fuel,vendor_id:0
 #: field:fleet.vehicle.log.services,vendor_id:0
 #: field:fleet.consumption.card,vendor_id:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.consumption.card.log.recharges.rml:0
+#: report:fleet.consumption.card.rml:0
+#: report:fleet.vehicle.log.fuel.rml:0
+#: report:fleet.vehicle.log.services.rml:0
 #: report:vehicle.rml:0
 msgid "Supplier"
 msgstr "Fournisseur"
@@ -654,6 +711,9 @@ msgstr "Solde courrant"
 
 #. module: fleet_guce
 #: field:fleet.consumption.card,security_code:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.consumption.card.log.recharges.rml:0
+#: report:fleet.consumption.card.rml:0
 #: report:vehicle.rml:0
 msgid "Security Code"
 msgstr "Code de sécurité"
@@ -687,12 +747,17 @@ msgid "Automatically created field to link to parent fleet.vehicle.cost"
 msgstr "Champ créer automatiquement et lié au \"fleet.vehicle.cost\" parent"
 
 #. module: fleet_guce
+#: report:fleet.vehicle.log.services.rml:0
+msgid "[[service.notes or ''"
+msgstr "[[service.notes or ''"
+
+#. module: fleet_guce
 #: model:ir.model,name:fleet_guce.model_fleet_consumption_card_type
 msgid "Type of consumption card"
 msgstr "Type de carte de consommation"
 
 #. module: fleet_guce
-#: code:addons/fleet_guce/fleet_guce.py:571
+#: code:addons/fleet_guce/fleet_guce.py:607
 #: field:fleet.vehicle.log.moves.needs,return_date:0
 #, python-format
 msgid "Estimated Return Date"
@@ -716,6 +781,7 @@ msgstr "Types de cartes de consommation"
 
 #. module: fleet_guce
 #: field:fleet.consumption.card.log.recharges,loader_id:0
+#: report:fleet.consumption.card.log.recharges.rml:0
 msgid "Loader"
 msgstr "Chargeur"
 
@@ -728,6 +794,12 @@ msgstr "Coût réel"
 #: model:fleet.service.type,name:fleet.type_service_service_8
 msgid "Repair and maintenance"
 msgstr "Maintenance et réparation"
+
+#. module: fleet_guce
+#: code:addons/fleet_guce/fleet_guce.py:542
+#, python-format
+msgid "Planned Move"
+msgstr "Planned Move"
 
 #. module: fleet
 #: model:ir.model,name:fleet.model_fleet_service_type
@@ -755,7 +827,7 @@ msgid "Contract Status"
 msgstr "Status du contrat"
 
 #. module: fleet_guce
-#: code:addons/fleet_guce/fleet_guce.py:248
+#: code:addons/fleet_guce/fleet_guce.py:251
 #: constraint:fleet.vehicle.log.fuel:0
 #, python-format
 msgid "\n"
@@ -765,8 +837,9 @@ msgstr "\n"
 "Le prix total et le prix au litre doivent être positifs et non nuls.\n"
 "Le priw total doit être supérieur au prix au litre"
 
-#. module: fleet
+#. modules: fleet, fleet_guce
 #: field:fleet.vehicle.cost,cost_subtype_id:0
+#: report:fleet.vehicle.log.services.rml:0
 msgid "Type"
 msgstr "Type"
 
@@ -793,7 +866,7 @@ msgstr "A/C Recharge"
 #. module: fleet
 #: view:fleet.vehicle.log.fuel:0
 msgid "Write here any other information"
-msgstr "Inscrivez ici toute autre information"
+msgstr "Inscrivez ici tout autre information"
 
 #. module: fleet_guce
 #: field:fleet.consumption.card.log.recharges,recharge_date:0
@@ -811,6 +884,7 @@ msgid "Junior"
 msgstr "Junior"
 
 #. module: fleet_guce
+#: report:fleet.consumption.card.log.recharges.rml:0
 #: model:ir.actions.act_window,name:fleet_guce.fleet_consumption_card_log_recharges_act
 #: model:ir.ui.menu,name:fleet_guce.fleet_consumption_card_log_recharges_menu
 msgid "Recharges Logs"
@@ -825,10 +899,15 @@ msgstr "Historique des recharges"
 msgid "None"
 msgstr "Aucun"
 
+#. module: fleet_guce
+#: model:ir.actions.act_window,name:fleet_guce.fleet_vehicle_log_moves_confirm_act
+msgid "Confirm Move"
+msgstr "Confirmer le déplacement"
+
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_47
 msgid "Transmission Filter Replacement"
-msgstr "Remplacement du filtre de transmission"
+msgstr "Transmission Filter Replacement"
 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_52
@@ -901,6 +980,11 @@ msgid "Contracts"
 msgstr "Contrats"
 
 #. module: fleet_guce
+#: report:fleet.consumption.card.rml:0
+msgid "INFORMATION ON A CONSUMPTION CARD"
+msgstr "INFORMATIONS SUR LA CARTE DE CONSOMMATION"
+
+#. module: fleet_guce
 #: view:fleet.vehicle.log.incidents:0
 msgid "Odometer Detail"
 msgstr "Détails sur le kilométrage"
@@ -930,10 +1014,13 @@ msgstr "Services associés aux véhicules"
 #: model:ir.actions.act_window,name:fleet.fleet_vehicle_state_act
 #: model:ir.ui.menu,name:fleet.fleet_vehicle_state_menu
 msgid "Vehicle Status"
-msgstr "Etats du véhicule"
+msgstr "Vehicle Status"
 
 #. module: fleet_guce
 #: field:fleet.consumption.card,card_type_id:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.consumption.card.log.recharges.rml:0
+#: report:fleet.consumption.card.rml:0
 #: report:vehicle.rml:0
 msgid "Card Type"
 msgstr "Type de carte"
@@ -950,6 +1037,7 @@ msgstr "Capcité du réservior"
 #: help:fleet.vehicle.log.incidents,odometer:0
 #: help:fleet.vehicle.log.moves,odometer:0
 #: help:fleet.vehicle.log.moves,odometer_back:0
+#: help:fleet.vehicle.log.moves.confirm,odometer:0
 msgid "Odometer measure of the vehicle at the moment of this log"
 msgstr "Valeur du compteur kilométrique au moment de ce service."
 
@@ -979,6 +1067,11 @@ msgstr "Montant de la recharge"
 msgid "Moves needs logs"
 msgstr "Moves needs logs"
 
+#. module: fleet_guce
+#: view:fleet.vehicle.log.moves.confirm:0
+msgid "Confirm moves"
+msgstr "Déplacements confirmés"
+
 #. module: fleet
 #: field:fleet.vehicle,message_is_follower:0
 msgid "Is a Follower"
@@ -987,7 +1080,7 @@ msgstr "Is a Follower"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_3
 msgid "A/C Diagnosis"
-msgstr "A/C Diagnostic"
+msgstr "A/C Diagnosis"
 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_23
@@ -998,11 +1091,15 @@ msgstr "Remplacement de la pompe à carburant"
 #: view:fleet.vehicle.cost:0
 #: field:fleet.vehicle.cost,date:0
 #: field:fleet.vehicle.odometer,date:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
 #: view:fleet.consumption.card.log.recharges:0
+#: report:fleet.consumption.card.log.recharges.rml:0
 #: view:fleet.vehicle.assignment:0
+#: report:fleet.vehicle.log.fuel.rml:0
 #: field:fleet.vehicle.log.incidents,date:0
 #: field:fleet.vehicle.log.moves,date:0
 #: view:fleet.vehicle.log.moves.needs:0
+#: report:fleet.vehicle.log.services.rml:0
 msgid "Date"
 msgstr "Date"
 
@@ -1060,6 +1157,9 @@ msgstr "Entry into service tax"
 
 #. module: fleet_guce
 #: field:fleet.consumption.card,name:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.consumption.card.log.recharges.rml:0
+#: report:fleet.consumption.card.rml:0
 #: report:vehicle.rml:0
 msgid "Card Number"
 msgstr "Numéro de la carte"
@@ -1070,9 +1170,9 @@ msgid "Vehicle Details"
 msgstr "Détail du véhicule"
 
 #. module: fleet_guce
-#: report:vehicle.rml:0
-msgid "Tank Capacity (L)"
-msgstr "Capacité du réservoir (L)"
+#: report:fleet.vehicle.log.services.rml:0
+msgid "COSTS LOGS FOR VEHICLE"
+msgstr "HISTORIQUE DES DEPENSES DU VEHICULE"
 
 #. module: fleet
 #: selection:fleet.vehicle,odometer_unit:0
@@ -1148,9 +1248,12 @@ msgstr "<p class=\"oe_view_nocontent_create\">\n"
 msgid "Service types"
 msgstr "Types d'intervention"
 
-#. module: fleet
+#. modules: fleet, fleet_guce
 #: field:fleet.vehicle.log.fuel,purchaser_id:0
 #: field:fleet.vehicle.log.services,purchaser_id:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.vehicle.log.fuel.rml:0
+#: report:fleet.vehicle.log.services.rml:0
 msgid "Purchaser"
 msgstr "Acheteur"
 
@@ -1186,6 +1289,7 @@ msgid "Purchased"
 msgstr "Acheté"
 
 #. module: fleet_guce
+#: view:fleet.vehicle.log.moves.confirm:0
 #: view:guce.fleet.consumption.card.recharge:0
 #: view:guce.fleet.need.answer:0
 msgid "Cancel"
@@ -1197,6 +1301,7 @@ msgstr "Annuler"
 #: field:fleet.vehicle.log.incidents,odometer_unit:0
 #: field:fleet.vehicle.log.moves,odometer_back_unit:0
 #: field:fleet.vehicle.log.moves,odometer_unit:0
+#: field:fleet.vehicle.log.moves.confirm,odometer_unit:0
 msgid "Unit"
 msgstr "Unité"
 
@@ -1242,6 +1347,11 @@ msgid "Other"
 msgstr "Autre"
 
 #. module: fleet_guce
+#: view:fleet.vehicle.log.moves.needs:0
+msgid "View Move"
+msgstr "Voir le déplacement"
+
+#. module: fleet_guce
 #: model:ir.model,name:fleet_guce.model_guce_fleet_consumption_card_recharge
 msgid "guce.fleet.consumption.card.recharge"
 msgstr "guce.fleet.consumption.card.recharge"
@@ -1261,6 +1371,12 @@ msgstr "Options"
 #: model:ir.model,name:fleet.model_fleet_vehicle_state
 msgid "fleet.vehicle.state"
 msgstr "Etat du véhicule"
+
+#. module: fleet_guce
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: model:ir.actions.report.xml,name:fleet_guce.fleet_consumption_card_card_log_consumptions_rml
+msgid "Fuel Consumptions"
+msgstr "Fuel Consumptions"
 
 #. module: fleet
 #: field:fleet.vehicle.model.brand,name:0
@@ -1361,6 +1477,11 @@ msgid "Messages and communication history"
 msgstr "Historique des messages et communications"
 
 #. module: fleet_guce
+#: report:fleet.vehicle.log.moves.rml:0
+msgid "MOVES LOGS FOR VEHICLE"
+msgstr "MOVES LOGS FOR VEHICLE"
+
+#. module: fleet_guce
 #: help:fleet.vehicle.log.moves.needs,seats:0
 msgid "Number of seats needed"
 msgstr "Nombre de places souhaités"
@@ -1373,7 +1494,7 @@ msgstr "Coût"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_53
 msgid "Windshield Wiper(s) Replacement"
-msgstr "Replacement des essuies-glaces"
+msgstr "Windshield Wiper(s) Replacement"
 
 #. module: fleet
 #: model:ir.model,name:fleet.model_fleet_vehicle_model
@@ -1440,6 +1561,7 @@ msgstr "Puissance du véhicule en kW."
 #: view:fleet.vehicle.log.fuel:0
 #: view:fleet.vehicle.odometer:0
 #: field:fleet.vehicle.odometer,vehicle_id:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
 #: view:fleet.vehicle.assignment:0
 #: field:fleet.vehicle.assignment,vehicle_id:0
 #: view:fleet.vehicle.log.incidents:0
@@ -1470,8 +1592,10 @@ msgstr "Alertes à traiter"
 msgid "INFORMATION ON A VEHICLE"
 msgstr "FICHE TECHNIQUE DU VÉHICULE"
 
-#. module: fleet
+#. modules: fleet, fleet_guce
 #: field:fleet.vehicle.log.fuel,liter:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.vehicle.log.fuel.rml:0
 msgid "Liter"
 msgstr "Litre"
 
@@ -1483,7 +1607,7 @@ msgstr "Coût du carburant"
 #. module: fleet
 #: view:fleet.vehicle.model:0
 msgid "Brand"
-msgstr "Marque"
+msgstr "Brand"
 
 #. module: fleet
 #: code:addons/fleet/fleet.py:669
@@ -1491,9 +1615,10 @@ msgstr "Marque"
 msgid "%s contract(s) need(s) to be renewed and/or closed!"
 msgstr "%s contrat(s) à renouveler et/ou à clôturer!"
 
-#. module: fleet
+#. modules: fleet, fleet_guce
 #: view:fleet.vehicle:0
 #: selection:fleet.vehicle.cost,cost_type:0
+#: model:ir.actions.report.xml,name:fleet_guce.fleet_vehicle_log_services_rml
 msgid "Services"
 msgstr "Interventions"
 
@@ -1513,13 +1638,16 @@ msgstr "Date de fin de contrat (par défaut, un an après la date de début)"
 #: field:fleet.vehicle.log.fuel,notes:0
 #: view:fleet.vehicle.log.services:0
 #: field:fleet.vehicle.log.services,notes:0
+#: report:fleet.consumption.card.log.recharges.rml:0
 #: view:fleet.vehicle.assignment:0
 #: field:fleet.vehicle.assignment,note:0
 #: field:fleet.vehicle.log.incidents,note:0
+#: report:fleet.vehicle.log.incidents.rml:0
 #: field:fleet.vehicle.log.moves,notes:0
 #: view:fleet.vehicle.log.moves.needs:0
 #: field:fleet.vehicle.log.moves.needs,answer_notes:0
 #: field:fleet.vehicle.log.moves.needs,note:0
+#: report:fleet.vehicle.log.services.rml:0
 #: view:guce.fleet.need.answer:0
 #: field:guce.fleet.need.answer,notes:0
 msgid "Notes"
@@ -1527,7 +1655,7 @@ msgstr "Notes"
 
 #. modules: fleet, fleet_guce
 #: code:addons/fleet/fleet.py:47
-#: code:addons/fleet_guce/fleet_guce.py:260
+#: code:addons/fleet_guce/fleet_guce.py:263
 #, python-format
 msgid "Operation not allowed!"
 msgstr "Vous n'avez pas la permission d'effectuer cette opération !"
@@ -1545,14 +1673,17 @@ msgstr "Affectation des chauffeurs aux véhicules"
 
 #. module: fleet_guce
 #: field:fleet.vehicle.log.moves,move_order_ref:0
+#: report:fleet.vehicle.log.moves.rml:0
 #: field:guce.fleet.need.answer,move_order_ref:0
 msgid "Order Reference"
 msgstr "Référence de l'ordre de déplacement"
 
-#. module: fleet
+#. modules: fleet, fleet_guce
 #: view:fleet.vehicle:0
 #: field:fleet.vehicle,log_fuel:0
 #: view:fleet.vehicle.log.fuel:0
+#: field:fleet.consumption.card,log_fuel:0
+#: model:ir.actions.report.xml,name:fleet_guce.fleet_vehicle_log_fuel_rml
 msgid "Fuel Logs"
 msgstr "Consommation de carburant"
 
@@ -1649,6 +1780,7 @@ msgstr "Emplacement"
 
 #. module: fleet_guce
 #: field:fleet.vehicle.log.fuel,payment_mode:0
+#: report:fleet.vehicle.log.fuel.rml:0
 msgid "Payment Mode"
 msgstr "Mode de règlement"
 
@@ -1670,8 +1802,10 @@ msgid "Move Types"
 msgstr "Types de déplacement"
 
 #. module: fleet_guce
-#: code:addons/fleet_guce/fleet_guce.py:573
+#: code:addons/fleet_guce/fleet_guce.py:609
+#: field:fleet.vehicle.log.moves,estimated_departure_date:0
 #: field:fleet.vehicle.log.moves.needs,departure_date:0
+#: report:fleet.vehicle.log.moves.rml:0
 #, python-format
 msgid "Estimated Departure Date"
 msgstr "Date estimée de départ"
@@ -1749,7 +1883,12 @@ msgstr "Départ"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_43
 msgid "Thermostat Replacement"
-msgstr "Replacement du thermostat"
+msgstr "Thermostat Replacement"
+
+#. module: fleet_guce
+#: report:fleet.vehicle.log.incidents.rml:0
+msgid "Date / Odometer"
+msgstr "Date / Odometer"
 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_37
@@ -1764,6 +1903,7 @@ msgstr "Coût associé à un véhicule"
 #. module: fleet_guce
 #: view:fleet.vehicle:0
 #: view:fleet.vehicle.log.moves:0
+#: model:ir.actions.report.xml,name:fleet_guce.fleet_vehicle_log_moves_rml
 #: model:ir.ui.menu,name:fleet_guce.fleet_vehicle_log_moves
 msgid "Moves"
 msgstr "Déplacements"
@@ -1796,7 +1936,7 @@ msgstr "Date d'achat du véhicule"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_36
 msgid "Power Steering Pump Replacement"
-msgstr "Replacement de la pompe de direction assistée"
+msgstr "Power Steering Pump Replacement"
 
 #. module: fleet_guce
 #: field:fleet.vehicle.log.moves,object:0
@@ -1885,7 +2025,7 @@ msgstr "Note"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_8
 msgid "Ball Joint Replacement"
-msgstr "Replacement du rotule"
+msgstr "Ball Joint Replacement"
 
 #. module: fleet_guce
 #: view:fleet.consumption.card.log.recharges:0
@@ -1899,7 +2039,7 @@ msgstr "Pièce jointe"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_22
 msgid "Fuel Injector Replacement"
-msgstr "Replacement de l'injecteur de carburant"
+msgstr "Fuel Injector Replacement"
 
 #. module: fleet
 #: help:fleet.vehicle,location:0
@@ -1909,7 +2049,7 @@ msgstr "Lieu du véhicule (garage, ...)"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_28
 msgid "Heater Hose Replacement"
-msgstr "Replacement du tuyau de chauffage"
+msgstr "Heater Hose Replacement"
 
 #. module: fleet
 #: help:fleet.vehicle.model,brand_id:0
@@ -1926,6 +2066,11 @@ msgstr "Numéro de série du moteur (VIN / SN)"
 msgid "Tags"
 msgstr "Tags"
 
+#. module: fleet_guce
+#: report:fleet.vehicle.log.incidents.rml:0
+msgid "INCIDENTS LOGS FOR VEHICLE"
+msgstr "INCIDENTS LOGS FOR VEHICLE"
+
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_7
 msgid "Alternator Replacement"
@@ -1936,10 +2081,15 @@ msgstr "Remplacement de l'alternateur"
 msgid "Kilometers"
 msgstr "kilomètres"
 
+#. module: fleet_guce
+#: report:fleet.vehicle.log.moves.rml:0
+msgid "Departure Date / Odometer"
+msgstr "Departure Date / Odometer"
+
 #. module: fleet
 #: view:fleet.vehicle.odometer:0
 msgid "Odometer Values Per Month"
-msgstr "Kilométrage par mois"
+msgstr "Kilomètrage par mois"
 
 #. module: fleet
 #: model:ir.actions.act_window,name:fleet.fleet_vehicle_model_act
@@ -1950,7 +2100,7 @@ msgstr "Modèle de véhicule"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_2
 msgid "A/C Condenser Replacement"
-msgstr "Replacement condenseur"
+msgstr "A/C Condenser Replacement"
 
 #. module: fleet
 #: view:fleet.vehicle.cost:0
@@ -1994,12 +2144,12 @@ msgstr "Coût estimé"
 #. module: fleet_guce
 #: view:fleet.consumption.card.log.recharges:0
 msgid "Consumption card"
-msgstr "Carte de consommation"
+msgstr "Carte de consommatio"
 
 #. module: fleet
 #: field:fleet.vehicle,power:0
 msgid "Power (kW)"
-msgstr "Puissance (kW)"
+msgstr "Power (kW)"
 
 #. module: fleet
 #: view:fleet.vehicle:0
@@ -2064,7 +2214,7 @@ msgid "Answer to this need"
 msgstr "Répondre à ce besoin"
 
 #. module: fleet_guce
-#: code:addons/fleet_guce/fleet_guce.py:571
+#: code:addons/fleet_guce/fleet_guce.py:607
 #: constraint:fleet.vehicle.log.moves.needs:0
 #, python-format
 msgid "\n"
@@ -2079,6 +2229,7 @@ msgstr "En reparation"
 
 #. module: fleet_guce
 #: field:fleet.vehicle.log.moves,arrival_place:0
+#: report:fleet.vehicle.log.moves.rml:0
 #: field:guce.fleet.need.answer,arrival_place:0
 msgid "Destination Place"
 msgstr "Destination"
@@ -2086,7 +2237,7 @@ msgstr "Destination"
 #. module: fleet
 #: field:fleet.vehicle.log.contract,ins_ref:0
 msgid "Contract Reference"
-msgstr "Référence du contrat"
+msgstr "Contract Reference"
 
 #. module: fleet
 #: selection:fleet.vehicle,fuel_type:0
@@ -2108,6 +2259,16 @@ msgstr "Transmission"
 #: model:ir.actions.act_window,name:fleet.action_fleet_vehicle_log_contract_graph
 msgid "Contracts Costs by Month"
 msgstr "Coût des contrats par mois"
+
+#. module: fleet_guce
+#: view:fleet.consumption.card:0
+msgid "View Recharges"
+msgstr "Voir les recharges"
+
+#. module: fleet_guce
+#: report:fleet.vehicle.log.services.rml:0
+msgid "SERVICES LOGS FOR VEHICLE"
+msgstr "SERVICES LOGS FOR VEHICLE"
 
 #. modules: fleet, fleet_guce
 #: model:ir.model,name:fleet.model_fleet_vehicle
@@ -2135,7 +2296,7 @@ msgstr "Date d'enregistrement"
 #. module: fleet
 #: model:res.groups,name:fleet.group_fleet_manager
 msgid "Manager"
-msgstr "Gestionaire"
+msgstr "Manager"
 
 #. module: fleet
 #: view:fleet.vehicle.odometer:0
@@ -2176,7 +2337,7 @@ msgid "Diesel"
 msgstr "Diesel"
 
 #. module: fleet_guce
-#: code:addons/fleet_guce/fleet_guce.py:260
+#: code:addons/fleet_guce/fleet_guce.py:263
 #, python-format
 msgid "Consumption card balance cant support operation."
 msgstr "Le solde de la carte de consommation ne peut permettre l'opération."
@@ -2216,6 +2377,11 @@ msgstr "Date de facture"
 msgid "Value of the bought vehicle"
 msgstr "Valeur d’achat du véhicule"
 
+#. module: fleet_guce
+#: report:fleet.consumption.card.log.recharges.rml:0
+msgid "RECHARGES LOGS FOR CONSUMPTION CARD"
+msgstr "RECHARGES LOGS FOR CONSUMPTION CARD"
+
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_24
 msgid "Head Gasket(s) Replacement"
@@ -2234,7 +2400,7 @@ msgstr "Les deux"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_48
 msgid "Transmission Fluid Replacement"
-msgstr "Replacement du liquide de transmission"
+msgstr "Transmission Fluid Replacement"
 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_service_1
@@ -2252,9 +2418,9 @@ msgid "Messages"
 msgstr "Messages"
 
 #. module: fleet_guce
-#: view:fleet.consumption.card:0
-msgid "View Recharges"
-msgstr "Voir les recharges"
+#: report:vehicle.rml:0
+msgid "Tank Capacity (L)"
+msgstr "Capacité du réservoir (L)"
 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_6
@@ -2323,6 +2489,7 @@ msgstr "Cartes de consommation"
 #. module: fleet_guce
 #: view:fleet.vehicle.log.incidents:0
 #: view:fleet.vehicle.log.moves:0
+#: view:fleet.vehicle.log.moves.confirm:0
 #: view:guce.fleet.consumption.card.recharge:0
 #: view:guce.fleet.need.answer:0
 msgid "Confirm"
@@ -2333,7 +2500,7 @@ msgstr "Confirmer"
 #: model:ir.actions.act_window,name:fleet.fleet_vehicle_log_fuel_act
 #: model:ir.ui.menu,name:fleet.fleet_vehicle_log_fuel_menu
 msgid "Vehicles Fuel Logs"
-msgstr "Suivi de consommation en carburant"
+msgstr "Suivi du niveau d'essence"
 
 #. module: fleet
 #: view:board.board:0
@@ -2345,9 +2512,12 @@ msgstr "Véhicules avec des alertes"
 msgid "License Plate"
 msgstr "Plaque d'immatriculatin"
 
-#. module: fleet
+#. modules: fleet, fleet_guce
 #: field:fleet.vehicle.log.fuel,inv_ref:0
 #: field:fleet.vehicle.log.services,inv_ref:0
+#: report:fleet.consumption.card.log.consumptions.rml:0
+#: report:fleet.vehicle.log.fuel.rml:0
+#: report:fleet.vehicle.log.services.rml:0
 msgid "Invoice Reference"
 msgstr "Référence de la facture"
 
@@ -2375,6 +2545,11 @@ msgstr "Autre(s)"
 #: model:fleet.service.type,name:fleet.type_service_51
 msgid "Wheel Alignment"
 msgstr "Parallèlisme"
+
+#. module: fleet_guce
+#: field:fleet.vehicle,log_costs:0
+msgid "Costs Log"
+msgstr "Costs Log"
 
 #. module: fleet_guce
 #: field:fleet.vehicle.assignment,driver_id:0
@@ -2412,6 +2587,11 @@ msgstr "Total of contracts due or overdue minus one"
 #: field:fleet.vehicle.log.contract,start_date:0
 msgid "Contract Start Date"
 msgstr "Date de début du contrat"
+
+#. module: fleet_guce
+#: report:fleet.consumption.card.log.recharges.rml:0
+msgid "Old Amount"
+msgstr "Old Amount"
 
 #. module: fleet_guce
 #: field:fleet.vehicle.log.moves,departure_place:0
@@ -2459,8 +2639,9 @@ msgstr "Remplacement d'un étrier de frein"
 msgid "Consumption Cards"
 msgstr "Cartes de consommation"
 
-#. module: fleet
+#. modules: fleet, fleet_guce
 #: view:fleet.vehicle:0
+#: model:ir.actions.report.xml,name:fleet_guce.fleet_vehicle_log_costs_rml
 msgid "Costs"
 msgstr "Coûts"
 
@@ -2480,7 +2661,7 @@ msgstr "Recharge"
 #: field:fleet.vehicle,log_services:0
 #: view:fleet.vehicle.log.services:0
 msgid "Services Logs"
-msgstr "Historique des interventions"
+msgstr "Services Logs"
 
 #. module: fleet_guce
 #: help:fleet.consumption.card.log.recharges,old_value:0
@@ -2529,6 +2710,11 @@ msgstr "Type de carburant"
 msgid "........."
 msgstr "........."
 
+#. module: fleet_guce
+#: view:fleet.vehicle.log.moves.confirm:0
+msgid "Confirm move"
+msgstr "Confirm move"
+
 #. modules: fleet, fleet_guce
 #: field:fleet.vehicle,odometer:0
 #: report:vehicle.rml:0
@@ -2553,6 +2739,7 @@ msgstr "Valeur résiduelle (hors TVA)"
 #. modules: fleet, fleet_guce
 #: model:res.groups,name:fleet.group_fleet_user
 #: field:fleet.vehicle.log.incidents,user_id:0
+#: report:fleet.vehicle.log.incidents.rml:0
 #: view:fleet.vehicle.log.moves.needs:0
 #: field:fleet.vehicle.log.moves.needs,user_id:0
 msgid "User"
@@ -2561,7 +2748,7 @@ msgstr "Utilisateur"
 #. module: fleet
 #: view:fleet.vehicle.log.contract:0
 msgid "Activation Cost"
-msgstr "Coût d'activation"
+msgstr "Activation Cost"
 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_45
@@ -2571,6 +2758,7 @@ msgstr "Remplacement des Pneus"
 #. module: fleet_guce
 #: view:fleet.move.type:0
 #: field:fleet.vehicle.log.moves,move_type_id:0
+#: report:fleet.vehicle.log.moves.rml:0
 #: field:guce.fleet.need.answer,move_type_id:0
 msgid "Move Type"
 msgstr "Type de déplacement"
@@ -2640,6 +2828,7 @@ msgstr "Est active"
 #. module: fleet_guce
 #: field:fleet.consumption.card,recharge_ids:0
 #: view:fleet.consumption.card.log.recharges:0
+#: model:ir.actions.report.xml,name:fleet_guce.fleet_consumption_card_log_recharges_rml
 msgid "Recharges"
 msgstr "Recharges"
 
@@ -2653,8 +2842,9 @@ msgstr "Montant de la recharge"
 msgid "Leasing"
 msgstr "Location"
 
-#. module: fleet
+#. modules: fleet, fleet_guce
 #: field:fleet.vehicle.cost,cost_type:0
+#: report:fleet.vehicle.log.services.rml:0
 msgid "Category of the cost"
 msgstr "Catégorie de la dépense"
 
@@ -2666,7 +2856,7 @@ msgstr "Contrats à renouvelé"
 #. module: fleet
 #: view:fleet.vehicle.log.contract:0
 msgid "Write here all other information relative to this contract"
-msgstr "Inscrivez ici toute autre information relative à ce contrat"
+msgstr "Write here all other information relative to this contract"
 
 #. module: fleet
 #: field:fleet.vehicle.model,brand_id:0
@@ -2676,6 +2866,7 @@ msgstr "Modèle de voiture"
 
 #. modules: fleet, fleet_guce
 #: view:fleet.vehicle:0
+#: report:fleet.consumption.card.rml:0
 #: report:vehicle.rml:0
 msgid "General Properties"
 msgstr "Propriétés"
@@ -2683,7 +2874,7 @@ msgstr "Propriétés"
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_21
 msgid "Exhaust Manifold Replacement"
-msgstr "Replacement du collecteur d'échappement"
+msgstr "Exhaust Manifold Replacement"
 
 #. module: fleet
 #: selection:fleet.vehicle.log.contract,state:0
@@ -2727,7 +2918,7 @@ msgid "Consumption cards"
 msgstr "Cartes de consommation"
 
 #. module: fleet_guce
-#: code:addons/fleet_guce/fleet_guce.py:573
+#: code:addons/fleet_guce/fleet_guce.py:609
 #: constraint:fleet.vehicle.log.moves.needs:0
 #, python-format
 msgid "\n"
@@ -2770,9 +2961,19 @@ msgid "Heater Blower Motor Replacement"
 msgstr "Heater Blower Motor Replacement"
 
 #. module: fleet_guce
+#: report:fleet.consumption.card.log.consumptions.rml:0
+msgid "FUEL LOGS FOR CONSUMPTION CARD"
+msgstr "FUEL LOGS FOR CONSUMPTION CARD"
+
+#. module: fleet_guce
 #: view:fleet.move.type:0
 msgid "Move types"
 msgstr "Types de déplacement"
+
+#. module: fleet_guce
+#: report:fleet.consumption.card.log.recharges.rml:0
+msgid "New Amount"
+msgstr "New Amount"
 
 #. module: fleet
 #: view:fleet.vehicle.log.fuel:0
@@ -2824,6 +3025,15 @@ msgstr "Sequence"
 msgid "Color"
 msgstr "Couleur"
 
+#. module: fleet_guce
+#: code:addons/fleet_guce/wizard/fleet_guce_wizard.py:120
+#: constraint:fleet.vehicle.log.moves.confirm:0
+#, python-format
+msgid "\n"
+"Odometer Value cant be null."
+msgstr "\n"
+"Odometer Value cant be null."
+
 #. module: fleet
 #: help:fleet.vehicle.cost,cost_type:0
 msgid "For internal purpose only"
@@ -2832,11 +3042,14 @@ msgstr "For internal purpose only"
 #. modules: fleet, fleet_guce
 #: field:fleet.vehicle.cost,odometer:0
 #: field:fleet.vehicle.odometer,value:0
+#: code:addons/fleet_guce/wizard/fleet_guce_wizard.py:120
 #: field:fleet.vehicle.log.incidents,odometer:0
 #: field:fleet.vehicle.log.moves,odometer:0
 #: field:fleet.vehicle.log.moves,odometer_back:0
+#: field:fleet.vehicle.log.moves.confirm,odometer:0
+#, python-format
 msgid "Odometer Value"
-msgstr "Kilométrage"
+msgstr "Kilomètrage"
 
 #. module: fleet
 #: help:fleet.vehicle.log.contract,notes:0

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+ <openerp>
+    <data noupdate="0">
+        <record forcecreate="True" id="ir_cron_manage_critical_balance" model="ir.cron">
+        <field name="name">Manage critical balance for consumption cards</field>
+        <field eval="True" name="active" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field eval="False" name="doall" />
+        <field eval="'fleet.consumption.card'" name="model" />
+        <field eval="'run_scheduler'" name="function" />
+        <field eval="'()'" name="args" />
+      </record>
+    </data>
+ </openerp>

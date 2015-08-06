@@ -44,6 +44,8 @@ fleet_consumption_card_type()
 
 
 class fleet_consumption_card(osv.osv):
+    _inherit = 'mail.thread'
+
     def return_action_to_open(self, cr, uid, ids, context=None):
         """ This opens the xml view specified in xml_id for the current consumption card """
         if context is None:
@@ -87,6 +89,15 @@ class fleet_consumption_card(osv.osv):
         result['domain'] = "[('id','in',[" + ','.join(map(str, fuel_ids)) + "])]"
         return result
 
+    def scheduler_manage_critical_balance(self, cr, uid, context=None):
+        ids = self.search(cr, uid, [('balance', '<=', 'critical_balance')], offset=0, limit=None, order=None, context=context)
+        for record in self.browse(cr, uid, ids, context):
+            self.message_post(cr, uid, [record.id], body=_('Current balance %s of the card is lower than critical balance %s.\nPlease reload the card!') % (record.balance, record.critical_balance))
+        return True
+
+    def run_scheduler(self, cr, uid, context=None):
+        self.scheduler_manage_critical_balance(cr, uid, context=context)
+        return True
 
 fleet_consumption_card()
 
