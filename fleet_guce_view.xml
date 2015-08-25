@@ -583,6 +583,22 @@
                 </form>
             </field>
         </record>
+        <record model="ir.actions.act_window" id="fleet_vehicle_log_moves_act">
+            <field name="name">Confirmed Moves</field>
+            <field name="res_model">fleet.vehicle.log.moves</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="context">{}</field>
+            <field name="domain">[('state','!=','draft')]</field>
+        </record>
+        <record model="ir.actions.act_window" id="fleet_vehicle_log_plan_moves_act">
+            <field name="name">Planned Moves</field>
+            <field name="res_model">fleet.vehicle.log.moves</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="context">{}</field>
+            <field name="domain">[('state','=','draft')]</field>
+        </record>
         <record id="fleet_vehicle_log_moves_calendar" model="ir.ui.view">
             <field name="name">fleet.vehicle.log.moves.calendar</field>
             <field name="model">fleet.vehicle.log.moves</field>
@@ -604,22 +620,6 @@
                     <field name="name"/>
                 </calendar>
             </field>
-        </record>
-        <record model="ir.actions.act_window" id="fleet_vehicle_log_moves_act">
-            <field name="name">Confirmed Moves</field>
-            <field name="res_model">fleet.vehicle.log.moves</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form,calendar</field>
-            <field name="context">{}</field>
-            <field name="domain">[('state','!=','draft')]</field>
-        </record>
-        <record model="ir.actions.act_window" id="fleet_vehicle_log_plan_moves_act">
-            <field name="name">Planned Moves</field>
-            <field name="res_model">fleet.vehicle.log.moves</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">calendar,tree,form</field>
-            <field name="context">{}</field>
-            <field name="domain">[('state','=','draft')]</field>
         </record>
         <menuitem id="fleet_vehicle_log_moves" parent="fleet.menu_root" sequence="2" name="Moves"/>
         <menuitem action="fleet_vehicle_log_plan_moves_act" id="fleet_vehicle_log_plan_moves_menu"
