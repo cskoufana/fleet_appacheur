@@ -54,5 +54,6 @@
                 file="fleet_guce/report/consumption_card_log_consumptions.rml"
                 name="fleet.consumption.card.log.consumptions.rml"
                 string="Fuel Consumptions"/>
+
     </data>
 </openerp>

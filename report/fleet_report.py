@@ -93,3 +93,4 @@ class fleet_consumption_card_log_consumptions(report_sxw.rml_parse):
 report_sxw.report_sxw('report.fleet.consumption.card.log.consumptions', 'fleet.consumption.card',
                       'addons/fleet_guce/report/consumption_card_log_consumptions.rml',
                       parser=fleet_consumption_card_log_consumptions)
+

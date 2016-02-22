@@ -58,28 +58,30 @@
             <field name="arch" type="xml">
                 <form string="Answer" version="7.0">
                     <sheet>
-                        <p class="oe_grey">
-                            Answer to the need request.
-                        </p>
+                        <!--<p class="oe_grey">-->
+                            <!--Answer to the need request.-->
+                        <!--</p>-->
                         <group col="2">
                             <group col="2" string="Decision">
                                 <field name="decision" required="1"/>
-                            </group>
-                            <group col="2" string="Notes">
+                                <label for="notes" string="Notes" />
                                 <field name="notes" attrs="{'required': [('decision','=','no')]}" nolabel="1"/>
                             </group>
+                            <!--<group col="2" string="Notes">-->
+                                <!--<field name="notes" attrs="{'required': [('decision','=','no')]}" nolabel="1"/>-->
+                            <!--</group>-->
                         </group>
                         <notebook attrs="{'invisible': [('decision', '!=', 'yes')]}">
                             <page string="Move">
                                 <group col="4" string="General information">
-                                    <field name="vehicle_id" on_change="on_change_vehicle(vehicle_id)"/>
-                                    <field name="driver_id"/>
-                                    <field name="move_type_id"/>
+                                    <field name="vehicle_id" on_change="on_change_vehicle(vehicle_id)" attrs="{'required' : [('decision','=','yes')]}"/>
+                                    <field name="driver_id" attrs="{'required' : [('decision','=','yes')]}"/>
+                                    <field name="move_type_id" attrs="{'required' : [('decision','=','yes')]}"/>
                                     <field name="move_order_ref"/>
                                     <field name="object"/>
                                 </group>
                                 <group col="2" string="Departure">
-                                    <field name="departure_date"/>
+                                    <field name="departure_date" attrs="{'required' : [('decision','=','yes')]}"/>
                                     <field name="departure_place"/>
                                     <field name="arrival_place"/>
                                 </group>

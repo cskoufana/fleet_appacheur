@@ -45,12 +45,12 @@ class guce_fleet_need_answer(osv.osv_memory):
     _columns = {
         'decision': fields.selection([('yes', 'Yes'), ('no', 'No')], 'Decision', required=True),
         'notes': fields.text("Notes"),
-        'vehicle_id': fields.many2one('fleet.vehicle', 'Vehicle', required=True),
+        'vehicle_id': fields.many2one('fleet.vehicle', 'Vehicle'),
         'move_order_ref': fields.char("Order Reference", size=64),
-        'driver_id': fields.many2one("res.partner", "Driver", required=True),
+        'driver_id': fields.many2one("res.partner", "Driver"),
         'object': fields.char("Object", size=64),
-        'move_type_id': fields.many2one("fleet.move.type", "Move Type", required=True),
-        'departure_date': fields.datetime("Departure Date", required=True),
+        'move_type_id': fields.many2one("fleet.move.type", "Move Type"),
+        'departure_date': fields.datetime("Departure Date"),
         'departure_place': fields.char("Departure Place", size=64),
         'arrival_place': fields.char("Destination Place", size=64),
         'description': fields.text("Description"),
@@ -90,7 +90,7 @@ class guce_fleet_need_answer(osv.osv_memory):
             'answer_date': time.strftime('%Y-%m-%d %H:%M:%S'),
             'answerer': uid,
             'state': 'answered',
-            'move_id': self.pool.get('fleet.vehicle.log.moves').create(cr, uid, value, context=context)
+            'move_id': self.pool.get('fleet.vehicle.log.moves').create(cr, uid, value, context=context) if wizard.decision == 'yes' else None
         }, context=context)
         return {'type': 'ir.actions.act_window_close'}
 
