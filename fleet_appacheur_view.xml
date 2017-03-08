@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-
+        <template id="assets_backend" name="fleet_appacheur_assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/fleet_appacheur/static/src/css/fleet_appacheur.css"/>
+                <script type="text/javascript" src="/fleet_appacheur/static/src/js/fleet_appacheur.js"/>
+            </xpath>
+        </template>
+        
+        <record id="action_dashboard_appacheur_fleet" model="ir.actions.client">
+            <field name="name">Costs Dashboard</field>
+            <field name="tag">fleet_appacheur.dashboard</field>
+        </record>
+        
         <record model="ir.ui.view" id="fleet_rim_form">
             <field name="name">fleet.rim.form</field>
             <field name="model">fleet.rim</field>
@@ -298,14 +309,33 @@
             <field name="inherit_id" ref="fleet.fleet_vehicle_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='act_show_log_cost']" position="after">
-                    <button name="return_action_to_open_view" type="object"
-                            context="{'xml_id':'fleet_vehicle_log_incidents_act'}" string="Incidents"
-                            help="show the incidents logs for this vehicle"/>
-                    <button name="return_action_to_open_view" type="object"
-                            context="{'xml_id':'fleet_vehicle_log_moves_act'}" string="Moves"
-                            help="show the moves logs for this vehicle"/>
+                    <button name="return_action_to_open_view" type="object" class="oe_inline oe_stat_button"
+                            context="{'xml_id':'fleet_vehicle_log_incidents_act'}"
+                            help="show the incidents logs for this vehicle" icon="fa-tasks" >
+							<field string="Incidents" name="incidents_count"
+								widget="statinfo" />
+                    </button>
+                    <button name="return_action_to_open_view" type="object" class="oe_inline oe_stat_button"
+                            context="{'xml_id':'fleet_vehicle_log_moves_act'}"
+                            help="show the moves logs for this vehicle" icon="fa-bar-chart" >
+							<field string="Moves" name="moves_count"
+								widget="statinfo" />
+                    </button>
                 </xpath>
+                <field name="driver_id" position="after">
+                    <field name="owner"/>
+                </field>
+                <field name="odometer" position="replace">
+                    <field name="odometer" required="1"/>
+                </field>
+                <field name="acquisition_date" position="replace">
+                    <field name="acquisition_date" required="1"/>
+                </field>
+                <field name="fuel_type" position="replace">
+                    <field name="fuel_type" required="1"/>
+                </field>
                 <field name="color" position="after">
+                	<field name="vehicle_type" required="1"/>
                     <field name="tank_capacity"/>
                     <field name="consumption"/>
                     <field name="tire_size"/>
@@ -317,7 +347,7 @@
                 </field>
                 <xpath expr="/form/sheet/group[2]" position="after">
                     <group col="2" string="Consumption card Option">
-                        <field name="consumption_card_id" required="1"/>
+                        <field name="consumption_card_id" required="0"/>
                     </group>
                     <notebook>
                         <page string="Attachments">
@@ -458,6 +488,9 @@
         </record>
         <menuitem action="fleet_vehicle_log_incidents_act" id="fleet_vehicle_log_incidents_menu"
                   parent="fleet.fleet_vehicles" sequence="10" groups="fleet.group_fleet_user"/>
+                  
+        <menuitem id="dasboard_appacheur_fleet" name="DashBoard" parent="fleet.fleet_vehicles"
+        sequence="0" action="action_dashboard_appacheur_fleet"/>
 
         <!--Move-->
         <record model="ir.ui.view" id="fleet_vehicle_log_moves_tree">
@@ -816,6 +849,60 @@
 
         <menuitem action="fleet_vehicle_log_moves_needs_act" id="fleet_vehicle_log_moves_needs_menu"
                   parent="fleet_vehicle_log_moves" sequence="9"/>
-
+                  
+                  
+        <!--Vehicle contract log-->
+        <record model="ir.ui.view" id="fleet_vehicle_log_contract_form_appacheur">
+            <field name="name">fleet.vehicle.log.contract.form.appacheur</field>
+            <field name="model">fleet.vehicle.log.contract</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_form"/>
+            <field name="arch" type="xml">
+                <field name="amount" position="replace">
+                    <field name="amount" required="1"/>
+                </field>
+                <field name="date" position="replace">
+                    <field name="date" required="1"/>
+                </field>
+                <field name="start_date" position="replace">
+                    <field name="start_date" required="1"/>
+                </field>
+                <field name="expiration_date" position="replace">
+                    <field name="expiration_date" required="1"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="fleet_vehicle_log_contract_search_appacheur">
+            <field name="name">vehicle.log.contract.search.appacheur</field>
+            <field name="model">fleet.vehicle.log.contract</field>
+            <field name="arch" type="xml">
+				<search string="All contracts">
+                    <field name="name" filter_domain="['|', ('name','ilike',self), ('ins_ref','ilike',self)]" string="Contract"/>
+                    <field name="vehicle_id"/>
+                    <field name="cost_subtype_id" filter_domain="['|', ('name','ilike',self), ('section','ilike',self)]" />
+                    <field name="insurer_id"/>
+                    <field name="state"/>
+                    <filter name="open" domain="[('state','=','open')]" string="In progress"/>
+                    <filter name="toclose" domain="[('state','=','toclose')]" string="To close"/>
+                    <filter name="closed" domain="[('state','=','closed')]" string="Terminated"/>
+                    <group expand="1" string="Group By">
+                        <filter name="groupby_vehicle" context="{'group_by' : 'vehicle_id'}" string="Vehicle"/>
+                        <filter name="groupby_type" context="{'group_by' : 'cost_subtype_id'}" string="Type"/>
+                        <filter name="groupby_state" context="{'group_by' : 'state'}" string="State"/>
+                        <filter name="groupby_expiration_date" context="{'group_by' : 'expiration_date'}" string="Expiration Date"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+	<!--Vehicle odometer-->
+        <record model="ir.ui.view" id="fleet_vehicle_odometer_tree_appacheur">
+            <field name="name">fleet.vehicle.odometer.tree.appacheur</field>
+            <field name="model">fleet.vehicle.odometer</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_tree"/>
+            <field name="arch" type="xml">
+                <field name="value" position="after">
+                    <field name="operations" required="1"/>
+                </field>
+            </field>
+        </record>
     </data>
 </openerp>

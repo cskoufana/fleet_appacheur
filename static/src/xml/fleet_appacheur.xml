@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+	<t t-name="DashBoardTemplate">
+        <div class="oe_home">
+		<div class="oe_homepage_left"></div>
+		</div>
+	</t>
+    <t t-name="VehicleCostBlock">
+        <div class="oe_list">
+        </div>
+    </t>
+	<t t-name="VehicleCost" t-if="data['result']">
+		<img class="print_element" width="130" style="position:absolute;right:10px;top:1px;" src="/web/binary/company_logo?company=1" />
+        <input class="screen_element" style="position:absolute;right:10px;top:1px;padding:5px;"  type="button" id="print_button_before"
+         value="Print Dashboard" />
+        <h2 class="appacheur-dashboard-title screen_element">Vehicles Costs Dashboard</h2>
+        <h2 class="print_element appacheur-custom-title"></h2>
+        <h3 class="print_element appacheur-custom-subtitle"></h3>
+        <ul class='appacheur-fleet-menu fleet-year-menu screen_element'>
+        	<t t-foreach="data['years']" t-as="c">
+        		<li><input type="checkbox"  t-att="{'value':c}" /><t t-esc="c" /></li>
+        	</t>
+        </ul>
+        <ul class='appacheur-fleet-menu fleet-month-menu screen_element'>
+        	<li><input type="checkbox"  value="12" />Dec</li>
+        	<li><input type="checkbox"  value="11" />Nov</li>
+        	<li><input type="checkbox"  value="10" />Oct</li>
+        	<li><input type="checkbox"  value="09" />Sept</li>
+        	<li><input type="checkbox"  value="08" />Augt</li>
+        	<li><input type="checkbox"  value="07" />July</li>
+        	<li><input type="checkbox"  value="06" />June</li>
+        	<li><input type="checkbox"  value="05" />May</li>
+        	<li><input type="checkbox"  value="04" />Apr</li>
+        	<li><input type="checkbox"  value="03" />Mar</li>
+        	<li><input type="checkbox"  value="02" />Feb</li>
+        	<li><input type="checkbox"  value="01" />Jan</li>
+        </ul>
+        <ul class='appacheur-fleet-menu fleet-type-menu screen_element'>
+        	<t t-foreach="data['types']" t-as="c">
+        		<li><input type="checkbox"  t-att="{'value':c[0]}" /><t t-esc="c[1]" /></li>
+        	</t>
+        </ul>
+        <div class="all_block">
+        <ul class='appacheur-fleet-total-menu'>
+        	<li class="total_total"><span class="title">Total Charge</span><span class="fleet-amount"><t t-esc="data['total']" /></span></li>
+        	<li class="total_total"><span class="title">Total Nb Km</span><span class="fleet-amount"><t t-esc="data['total_km']" /></span></li>
+        	<t t-foreach="data['costs']" t-as="c">
+        		<li t-att="{'class':'max_cost_'+(data['max_costs'] == c[1])}"><span class="title"><t t-esc="c[0]" /></span><span class="fleet-amount"><t t-esc="c[1]" /></span></li>
+		   	</t>
+        </ul>
+       	<table class="appacheur-fleet-table">
+        	<thead>
+        	<tr>
+        		<th class="fleet-first">Véhicle</th>
+        		<th><input class="fleet_order_by" type="radio" name="order_by" checked="checked" value='km' />Km</th>
+        		<th><input class="fleet_order_by" type="radio" name="order_by" checked="checked" value='total' />Total</th>
+        		<t t-foreach="data['costs']" t-as="c">
+		    		<th><input class="fleet_order_by" type="radio" name="order_by" t-att="{'value':c[0]}" /><t t-esc="c[0]" /></th>
+		    	</t>
+        	</tr>
+        	</thead>
+        	<tbody>
+        		<t t-foreach="data['items']" t-as="i">
+    				<tr>
+    					<td class="fleet-first"><a class="oe_vehicle_id_link" t-att-data-id="i[1]['id']" href="#"><span class="fleet-text"><t t-esc="i[1]['reference']" /></span></a></td>
+		    			<td>
+		    				<span class="fleet-amount fleet-text"><t t-esc="i[1]['km']" /></span>
+		    				<span class="fleet-bar-km fleet-bar-animate" t-att="{'style':'border-right-width:'+ i[1]['km_width']+'px;','width':i[1]['km_width']}"></span>
+		    			</td>
+		        		<td>
+		    				<span class="fleet-amount fleet-text"><t t-esc="i[1]['total']" /></span>
+		    				<span class="fleet-bar fleet-bar-animate" t-att="{'style':'border-right-width:'+ i[1]['total_width']+'px;','width':i[1]['total_width']}"></span>
+		    			</td>
+		        		<t t-foreach="data['costs']" t-as="c">
+		    				<td>
+		    					<span class="fleet-amount fleet-text"><t t-esc="i[1][c[0]]" /></span>
+		    					<span class="fleet-bar" t-att="{'style':'border-right-width:'+ i[1][c[0]+'_width']+'px;','width': i[1][c[0]+'_width']}"></span>
+		    				</td>
+		    			</t>
+    				</tr>
+				</t>
+        	</tbody>
+       	</table>
+        </div>
+        <div id="hiddendiv" style="display:none;"></div>
+        <div id = "fleet_dialog" class="screen_element"
+         	title = "Print">
+        	 <table cellpadding="10">
+	        	 <tr><td>Title</td><td><input type="text" id="print_title" size="40" /></td></tr>
+	        	 <tr><td>Subtitle</td><td><input type="text" id="print_subtitle" size="40" /></td></tr>
+	        	 <tr><td></td><td><input type="button" id="print_button" value="Print Dashboard" /> </td></tr>
+        	 </table>	
+		</div>
+    </t>
+</templates>

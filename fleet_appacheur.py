@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 #__author__ = 'yenke'
 
-from osv import fields, osv
+from openerp.osv import fields, orm, osv
 from openerp.osv.orm import except_orm
 from openerp.tools.translate import _
+from datetime import date
 import time
+import math
+import logging
 
 
-class fleet_rim(osv.osv):
+class fleet_rim(orm.Model):
     _name = "fleet.rim"
     _description = 'Rim of vehicle'
     _columns = {
@@ -20,7 +23,43 @@ class fleet_rim(osv.osv):
 fleet_rim()
 
 
-#class res_partner(osv.osv):
+class fleet_vehicle_type(orm.Model):
+    _name = "fleet.vehicle.type"
+    _description = 'Type de véhicule'
+    _columns = {
+        'name': fields.char("Name", size=64, required=True),
+        'description': fields.text("Description"),
+    }
+    _sql_constraints = [('fleet_vehicle_type_name_unique', 'unique(name)', 'type name already exists')]
+
+
+
+
+class fleet_service_type(orm.Model):
+    _inherit = "fleet.service.type"
+    _columns = {
+        'section': fields.selection([
+            ('administration', 'Administration'),
+            ('fuel', 'Fuel'),
+            ('intervention', 'Intervention'),
+            ('lubricants', 'Lubricants'),
+            ('detached_pieces', 'Detached Pieces'),
+            ('tires', 'Tires')
+        ], string='Section'),
+    }
+
+
+
+
+class fleet_vehicle_odometer(orm.Model):
+    _inherit = "fleet.vehicle.odometer"
+    _columns = {
+        'operations': fields.text(string='Operation'),
+    }
+
+
+
+#class res_partner(orm.Model):
 #    _name = "res.partner"
 #    _inherit = 'res.partner'
 #    _columns = {
@@ -29,7 +68,7 @@ fleet_rim()
 #res_partner()
 
 
-class fleet_consumption_card_type(osv.osv):
+class fleet_consumption_card_type(orm.Model):
     _name = "fleet.consumption.card.type"
     _description = "Type of consumption card"
     _columns = {
@@ -43,7 +82,7 @@ class fleet_consumption_card_type(osv.osv):
 fleet_consumption_card_type()
 
 
-class fleet_consumption_card(osv.osv):
+class fleet_consumption_card(orm.Model):
     _inherit = 'mail.thread'
 
     def return_action_to_open(self, cr, uid, ids, context=None):
@@ -103,7 +142,7 @@ class fleet_consumption_card(osv.osv):
 fleet_consumption_card()
 
 
-class fleet_consumption_card_log_recharges(osv.osv):
+class fleet_consumption_card_log_recharges(orm.Model):
     _name = 'fleet.consumption.card.log.recharges'
     _description = 'Recharges for cards'
     _rec_name = 'order_ref'
@@ -159,7 +198,7 @@ class fleet_consumption_card_log_recharges(osv.osv):
 fleet_consumption_card_log_recharges()
 
 
-class fleet_vehicle(osv.osv):
+class fleet_vehicle(orm.Model):
     def return_action_to_open_view(self, cr, uid, ids, context=None):
         """ This opens the xml view specified in xml_id for the current vehicle """
         if context is None:
@@ -172,13 +211,125 @@ class fleet_vehicle(osv.osv):
             res['domain'] = [('vehicle_id', '=', ids[0])]
             return res
         return False
+    def _moves_count(self, cr, uid, ids, field_name, arg, context=None):
+        res={}
+        for vehicle in self.browse(cr, uid, ids, dict(context)):
+            res[vehicle.id] = len(vehicle.log_moves)
+        return res
+
+    def _incidents_count(self, cr, uid, ids, field_name, arg, context=None):
+        res={}
+        for vehicle in self.browse(cr, uid, ids, dict(context)):
+            res[vehicle.id] = len(vehicle.log_incidents)
+        return res
+    
+
+    def get_costs_by_vehicles_and_costs_type(self, cr, uid,context=None):
+        _logger = logging.getLogger(__name__)
+        res={}
+        data={}
+        costs={}
+        _where=""
+        _where_veh=""
+        _where_cost=""
+        _logger.debug('year %s' % (context.get('fleet_filter_year', '0')))
+        try:
+            if(context.get('fleet_filter_year', '0') != '0'):
+                _where = _where +" and to_number(to_char(fv.date, 'YYYY'),'9999') in ("+context.get('fleet_filter_year', '0')+")"
+            if(context.get('fleet_filter_month', '0') != '0'):
+                _where = _where +" and to_number(to_char(fv.date, 'MM'),'99') in ("+context.get('fleet_filter_month', '0')+")"
+            if(context.get('fleet_filter_type', '0') != '0'):
+                _where = _where +" and v.vehicle_type in ("+context.get('fleet_filter_type', '0')+")"
+                _where_veh = _where_veh +" where vehicle_type in ("+context.get('fleet_filter_type', '0')+")"
+                
+            order_by = context.get('fleet_order_by', 'total')
+            
+            cr.execute( 'SELECT id,name FROM fleet_vehicle_type')
+            data["types"] = cr.fetchall()
+            today = date.today().year
+            data["years"]=[today,today-1,today-2,today-3,today-4]   
+            cr.execute( 'SELECT max(amount) from (SELECT sum(fv.amount) as amount FROM fleet_vehicle_cost fv , fleet_vehicle v , fleet_service_type st where v.id = fv.vehicle_id and st.id = fv.cost_subtype_id '+_where+' group by fv.vehicle_id,st.section) as ls')
+            result = cr.fetchall()
+            for rs in result:
+                max = float(rs[0])  
+            cr.execute( 'SELECT distinct section FROM fleet_service_type')
+            result = cr.fetchall()
+            for rs in result:
+                costs[rs[0]] = 0;
+            cr.execute( 'SELECT distinct license_plate,name,id FROM fleet_vehicle '+_where_veh)
+            result = cr.fetchall()
+            for rs in result:
+                res[rs[0]] = {};
+                res[rs[0]]["reference"] =rs[0]
+                res[rs[0]]["id"] =rs[2]
+                res[rs[0]]["name"] =rs[1]
+                res[rs[0]]["total"] = 0
+                res[rs[0]]["total_width"] = 0
+            cr.execute( 'SELECT max(amount) from (SELECT sum(amount) as amount FROM fleet_vehicle_cost fv,fleet_vehicle v,fleet_service_type st where v.id= fv.vehicle_id and st.id = fv.cost_subtype_id '+_where+' group by vehicle_id) as ls')
+            result = cr.fetchall()
+            for rs in result:
+                max_total = float(rs[0])
+            cr.execute( 'SELECT v.license_plate,v.name,st.section ,sum(fv.amount),max(fv.amount),v.id FROM fleet_vehicle_cost fv,fleet_vehicle v,fleet_service_type st where v.id= fv.vehicle_id and st.id = fv.cost_subtype_id '+_where+' group by v.id, v.license_plate,v.name,st.section')
+            result = cr.fetchall()
+            data["total"] =0
+            for rs in result:
+                if rs[0] not in res :
+                    res[rs[0]] = {}
+                if "total" not in res[rs[0]] :
+                    res[rs[0]]["total"] = 0
+                res[rs[0]]["reference"]=rs[0]
+                res[rs[0]]["id"]=rs[5]
+                res[rs[0]]["name"]=rs[1]
+                res[rs[0]][rs[2]] = math.ceil(rs[3])
+                res[rs[0]][rs[2]+"_width"] = int(float(rs[3]) * 40 / max)
+                res[rs[0]]["total"] = res[rs[0]]["total"]+math.ceil(rs[3]);
+                res[rs[0]]["total_width"] = int(float(res[rs[0]]["total"]) * 40 / max_total)
+                if rs[2] not in costs :
+                    costs[rs[2]] = 0
+                costs[rs[2]] = costs[rs[2]] +math.ceil(rs[3])
+                data["total"] = data["total"] +  math.ceil(rs[3])
+            data["costs"] = costs.items()
+            data["items"] = res.items()
+            max_cost = 0
+            
+            cr.execute( 'SELECT v.license_plate,min(value),max(value), (max(value)-min(value)) km FROM fleet_vehicle_odometer fv,fleet_vehicle v where v.id= fv.vehicle_id  '+_where+' group by v.license_plate  order by km desc')
+            result = cr.fetchall()
+            data["total_km"] = 0
+            max_km = False
+            for rs in result:
+                if not max_km:
+                    max_km=int(rs[3])
+                res[rs[0]]["km"]=rs[3]
+                if max_km :
+                    res[rs[0]]["km_width"]=int(rs[3]) * 30 / max_km
+                data["total_km"] = data["total_km"] + int(rs[3])
+                
+            for cs in data["costs"]:
+                if cs[1] > max_cost:
+                    max_cost = cs[1]
+                for it in data["items"] :
+                    if cs[0] not in it[1] :
+                        it[1][cs[0]] = 0
+                        it[1][cs[0]+"_width"] = 0
+                    if "km" not in it[1] :
+                        it[1]["km"]=0
+                        it[1]["km_width"]=0
+            data["items"].sort(key=lambda x: x[1][order_by],reverse=True)
+            data["max_costs"] = max_cost
+            data["result"] = True
+        except Exception: 
+            data["result"] = False
+        return data
+    
 
     _name = 'fleet.vehicle'
     _inherit = 'fleet.vehicle'
     _description = 'Information on a vehicle'
     _columns = {
         'tire_size': fields.float("Tire Size"),
+        'owner': fields.many2one('res.partner', 'Vehicle Owner'),
         'rim_id': fields.many2one("fleet.rim", "Rim Type"),
+        'vehicle_type': fields.many2one("fleet.vehicle.type", "Type"),
         'tank_capacity': fields.float("Tank Capacity"),
         'consumption': fields.float("Consumption per 100 km"),
         'sale_date': fields.date("Sale Date", help="Date when the vehicle has been sold"),
@@ -191,6 +342,8 @@ class fleet_vehicle(osv.osv):
         'attachment_ids': fields.many2many("ir.attachment", "fleet_vehicle_attachment_rel", "attachment_id",
                                            "vehicle_id", "Attachments"),
         'log_costs': fields.one2many('fleet.vehicle.cost', 'vehicle_id', 'Costs Log'),
+        'incidents_count': fields.function(_incidents_count, type='integer', string="Incidents"),
+        'moves_count': fields.function(_moves_count, type='integer', string="Moves")
     }
 
     def copy(self, cr, uid, id, default=None, context=None):
@@ -207,7 +360,7 @@ class fleet_vehicle(osv.osv):
 fleet_vehicle()
 
 
-class fleet_vehicle_log_fuel(osv.Model):
+class fleet_vehicle_log_fuel(orm.Model):
     def on_change_value(self, cr, uid, ids, liter, price_per_liter, amount, context=None):
         liter = float(liter)
         price_per_liter = float(price_per_liter)
@@ -287,7 +440,7 @@ class fleet_vehicle_log_fuel(osv.Model):
 fleet_vehicle_log_fuel()
 
 
-class fleet_move_type(osv.osv):
+class fleet_move_type(orm.Model):
     _name = 'fleet.move.type'
     _description = 'Moves types related to vehicles'
     _columns = {
@@ -300,7 +453,7 @@ class fleet_move_type(osv.osv):
 fleet_move_type()
 
 
-class fleet_passenger(osv.osv):
+class fleet_passenger(orm.Model):
     _name = 'fleet.passenger'
     _description = 'Passengers for moves'
     _columns = {
@@ -313,7 +466,7 @@ class fleet_passenger(osv.osv):
 fleet_passenger()
 
 
-class fleet_vehicle_log_moves(osv.osv):
+class fleet_vehicle_log_moves(orm.Model):
     def _move_name_get_fnc(self, cr, uid, ids, name, unknow_none, context=None):
         res = {}
         for record in self.browse(cr, uid, ids, context=context):
@@ -435,7 +588,7 @@ class fleet_vehicle_log_moves(osv.osv):
 fleet_vehicle_log_moves()
 
 
-class fleet_vehicle_log_incidents(osv.osv):
+class fleet_vehicle_log_incidents(orm.Model):
     def _incident_name_get_fnc(self, cr, uid, ids, name, unknow_none, context=None):
         res = {}
         for record in self.browse(cr, uid, ids, context=context):
@@ -516,7 +669,7 @@ class fleet_vehicle_log_incidents(osv.osv):
 fleet_vehicle_log_incidents()
 
 
-class fleet_vehicle_log_services(osv.osv):
+class fleet_vehicle_log_services(orm.Model):
     _name = 'fleet.vehicle.log.services'
     _inherit = 'fleet.vehicle.log.services'
     _columns = {
@@ -529,7 +682,7 @@ class fleet_vehicle_log_services(osv.osv):
 fleet_vehicle_log_services()
 
 
-class fleet_vehicle_log_moves_needs(osv.osv):
+class fleet_vehicle_log_moves_needs(orm.Model):
     def return_action_to_open_view(self, cr, uid, ids, context=None):
         """ This opens the xml view specified in xml_id for the current vehicle """
         if context is None:
@@ -637,7 +790,7 @@ class fleet_vehicle_log_moves_needs(osv.osv):
 fleet_vehicle_log_moves_needs()
 
 
-class fleet_vehicle_assignment(osv.osv):
+class fleet_vehicle_assignment(orm.Model):
     def create(self, cr, uid, value, context=None):
         if 'driver_id' in value:
             ids = []

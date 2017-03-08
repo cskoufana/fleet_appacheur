@@ -1,0 +1,172 @@
+.appacheur-dashboard-title{
+	padding-left:30px;
+	width:100%;
+}
+.appacheur-fleet-menu li {
+    padding: 2px 10px;
+    float: right;
+    border: 1px solid #ddd;
+    margin-left: 5px;
+    color: #aaa;
+    font-size:11px;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.appacheur-fleet-menu {
+    display: block;
+    padding: 10px;
+    list-style: none;
+    clear: left;
+    width: 100%;
+    height: 35px;
+    text-align: right;
+    margin:0;
+}
+table.appacheur-fleet-table {
+    /* width: 95%; */
+    margin-left: 30px;
+    clear:left;
+}
+table.appacheur-fleet-table tr{
+    border-bottom: solid 1px #999;
+}
+table.appacheur-fleet-table th{
+    padding: 5px;
+    background: #fff;
+    border: none;
+    width: 123px;
+    text-align:center;
+    font-size: 11px;
+}
+ table.appacheur-fleet-table td {
+    padding: 2px 0px;
+    background: #fff;
+    border: none;
+    width: 123px;
+    vertical-align: middle;
+}
+table.appacheur-fleet-table span.fleet-bar {
+    display: block;
+    float: left;
+    height: 12px;
+    background: rgb(31, 119, 180);
+    border:1px solid rgb(31, 119, 180);
+    border-right:1px solid rgb(31, 119, 180);
+    width: 0px;
+}
+table.appacheur-fleet-table span.fleet-bar-km {
+    display: block;
+    float: left;
+    height: 2px;
+    background: rgb(31, 119, 180);
+    border:1px solid rgb(31, 119, 180);
+    border-right:3px solid rgb(31, 119, 180);
+    width: 0px;
+    margin-top: 5px;
+}
+span.fleet-text {
+    font-size: 10px;
+}
+table.appacheur-fleet-table span.fleet-amount {
+    float: left;
+    width: 60px;
+    height: 12px;
+    display: block;
+    text-align: right;
+    margin-right:2px;
+    font-size: 11px;
+}
+
+ul.appacheur-fleet-total-menu {
+    display: block;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    height: 60px;
+    margin-top: 10px
+}
+
+ul.appacheur-fleet-total-menu li {
+    display: block;
+    float: left;
+    padding: 5px;
+    width: 100px;
+    border: solid 1px #999;
+    margin-right: 5px;
+    font-size:11px;
+}
+
+appacheur-fleet-total-menu li span{
+    display: block;
+    width: 100%;
+    font-weight: 700;
+}
+
+ul.appacheur-fleet-total-menu  span.title {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    text-decoration: underline;
+    margin-bottom: 5px;
+    height: 15px;
+    overflow: hidden;
+}
+
+.appacheur-fleet-total-menu span.fleet-amount {
+    display: block;
+    text-align: center;
+    padding-left: 20px;
+}
+ul.appacheur-fleet-total-menu li.total_total{
+	margin-right:15px;
+	margin-left:15px;
+	background:#ddd;
+}
+ul.appacheur-fleet-total-menu li.max_cost_true{
+	background:#eaa;
+	border-left:solid 10px #999;
+}
+.appacheur-fleet-table .fleet-first{
+	width:70px;
+	font-weight:600;
+}
+#fleet_dialog td{
+	padding:10px;
+}
+
+#fleet_dialog td input{
+	padding:5px;
+}
+@media screen {
+	.print_element {
+  		display: none;
+  	}
+  	
+  	.screen_element{
+  		display: block;
+  	}
+}
+
+@media print {
+	.print_element {
+  		display: block;
+  	}
+  	.screen_element{
+  		display: none;
+  	}
+  	.appacheur-custom-subtitle{
+		width:90%;	
+		text-align:center;
+		margin-bottom:30px;
+		font-style: italic;
+	}
+	.appacheur-custom-title{
+		clear:left;
+		width:90%;	
+		text-align:center;
+		margin-bottom:10px;
+		text-decoration:underline;
+	}
+}

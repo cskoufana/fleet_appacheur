@@ -2,7 +2,7 @@
 #__author__ = 'yenke'
 
 from openerp.tools.translate import _
-from osv import fields, osv
+from openerp.osv import fields, orm, osv
 import time
 
 
