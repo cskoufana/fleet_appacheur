@@ -233,92 +233,98 @@ class fleet_vehicle(orm.Model):
         _where_veh=""
         _where_cost=""
         _logger.debug('year %s' % (context.get('fleet_filter_year', '0')))
-        try:
-            if(context.get('fleet_filter_year', '0') != '0'):
-                _where = _where +" and to_number(to_char(fv.date, 'YYYY'),'9999') in ("+context.get('fleet_filter_year', '0')+")"
-            if(context.get('fleet_filter_month', '0') != '0'):
-                _where = _where +" and to_number(to_char(fv.date, 'MM'),'99') in ("+context.get('fleet_filter_month', '0')+")"
-            if(context.get('fleet_filter_type', '0') != '0'):
-                _where = _where +" and v.vehicle_type in ("+context.get('fleet_filter_type', '0')+")"
-                _where_veh = _where_veh +" where vehicle_type in ("+context.get('fleet_filter_type', '0')+")"
-                
-            order_by = context.get('fleet_order_by', 'total')
+        if(context.get('fleet_filter_year', '0') != '0'):
+            _where = _where +" and to_number(to_char(fv.date, 'YYYY'),'9999') in ("+context.get('fleet_filter_year', '0')+")"
+        if(context.get('fleet_filter_month', '0') != '0'):
+            _where = _where +" and to_number(to_char(fv.date, 'MM'),'99') in ("+context.get('fleet_filter_month', '0')+")"
+        if(context.get('fleet_filter_type', '0') != '0'):
+            _where = _where +" and v.vehicle_type in ("+context.get('fleet_filter_type', '0')+")"
+            _where_veh = _where_veh +" where vehicle_type in ("+context.get('fleet_filter_type', '0')+")"
             
-            cr.execute( 'SELECT id,name FROM fleet_vehicle_type')
-            data["types"] = cr.fetchall()
-            today = date.today().year
-            data["years"]=[today,today-1,today-2,today-3,today-4]   
-            cr.execute( 'SELECT max(amount) from (SELECT sum(fv.amount) as amount FROM fleet_vehicle_cost fv , fleet_vehicle v , fleet_service_type st where v.id = fv.vehicle_id and st.id = fv.cost_subtype_id '+_where+' group by fv.vehicle_id,st.section) as ls')
-            result = cr.fetchall()
-            for rs in result:
+        order_by = context.get('fleet_order_by', 'total')
+        
+        cr.execute( 'SELECT id,name FROM fleet_vehicle_type')
+        data["types"] = cr.fetchall()
+        today = date.today().year
+        data["years"]=[today,today-1,today-2,today-3,today-4]   
+        cr.execute( 'SELECT max(amount) from (SELECT sum(fv.amount) as amount FROM fleet_vehicle_cost fv , fleet_vehicle v , fleet_service_type st where v.id = fv.vehicle_id and st.id = fv.cost_subtype_id '+_where+' group by fv.vehicle_id,st.section) as ls')
+        result = cr.fetchall()
+        max = 0
+        for rs in result:
+            if(rs[0]):
                 max = float(rs[0])  
-            cr.execute( 'SELECT distinct section FROM fleet_service_type')
-            result = cr.fetchall()
-            for rs in result:
-                costs[rs[0]] = 0;
-            cr.execute( 'SELECT distinct license_plate,name,id FROM fleet_vehicle '+_where_veh)
-            result = cr.fetchall()
-            for rs in result:
-                res[rs[0]] = {};
-                res[rs[0]]["reference"] =rs[0]
-                res[rs[0]]["id"] =rs[2]
-                res[rs[0]]["name"] =rs[1]
-                res[rs[0]]["total"] = 0
-                res[rs[0]]["total_width"] = 0
-            cr.execute( 'SELECT max(amount) from (SELECT sum(amount) as amount FROM fleet_vehicle_cost fv,fleet_vehicle v,fleet_service_type st where v.id= fv.vehicle_id and st.id = fv.cost_subtype_id '+_where+' group by vehicle_id) as ls')
-            result = cr.fetchall()
-            for rs in result:
+        cr.execute( 'SELECT distinct section FROM fleet_service_type')
+        result = cr.fetchall()
+        for rs in result:
+            costs[rs[0]] = 0;
+        cr.execute( 'SELECT distinct license_plate,name,id FROM fleet_vehicle '+_where_veh)
+        result = cr.fetchall()
+        for rs in result:
+            res[rs[0]] = {};
+            res[rs[0]]["reference"] =rs[0]
+            res[rs[0]]["id"] =rs[2]
+            res[rs[0]]["name"] =rs[1]
+            res[rs[0]]["total"] = 0
+            res[rs[0]]["total_width"] = 0
+        cr.execute( 'SELECT max(amount) from (SELECT sum(amount) as amount FROM fleet_vehicle_cost fv,fleet_vehicle v,fleet_service_type st where v.id= fv.vehicle_id and st.id = fv.cost_subtype_id '+_where+' group by vehicle_id) as ls')
+        result = cr.fetchall()
+        max_total=0
+        for rs in result:
+            if(rs[0]) :
                 max_total = float(rs[0])
-            cr.execute( 'SELECT v.license_plate,v.name,st.section ,sum(fv.amount),max(fv.amount),v.id FROM fleet_vehicle_cost fv,fleet_vehicle v,fleet_service_type st where v.id= fv.vehicle_id and st.id = fv.cost_subtype_id '+_where+' group by v.id, v.license_plate,v.name,st.section')
-            result = cr.fetchall()
-            data["total"] =0
-            for rs in result:
-                if rs[0] not in res :
-                    res[rs[0]] = {}
-                if "total" not in res[rs[0]] :
-                    res[rs[0]]["total"] = 0
-                res[rs[0]]["reference"]=rs[0]
-                res[rs[0]]["id"]=rs[5]
-                res[rs[0]]["name"]=rs[1]
+        cr.execute( """SELECT v.license_plate,v.name,st.section ,sum(fv.amount),max(fv.amount),v.id 
+FROM fleet_vehicle v
+LEFT JOIN fleet_vehicle_cost fv on v.id= fv.vehicle_id
+LEFT JOIN fleet_service_type st on st.id = fv.cost_subtype_id 
+where  1=1 """+_where+""" group by v.id, v.license_plate,v.name,st.section""")
+        result = cr.fetchall()
+        data["total"] =0
+        for rs in result:
+            if rs[0] not in res :
+                res[rs[0]] = {}
+            if "total" not in res[rs[0]] :
+                res[rs[0]]["total"] = 0
+            res[rs[0]]["reference"]=rs[0]
+            res[rs[0]]["id"]=rs[5]
+            res[rs[0]]["name"]=rs[1]
+            if(rs[2]) :
                 res[rs[0]][rs[2]] = math.ceil(rs[3])
                 res[rs[0]][rs[2]+"_width"] = int(float(rs[3]) * 40 / max)
-                res[rs[0]]["total"] = res[rs[0]]["total"]+math.ceil(rs[3]);
-                res[rs[0]]["total_width"] = int(float(res[rs[0]]["total"]) * 40 / max_total)
-                if rs[2] not in costs :
-                    costs[rs[2]] = 0
-                costs[rs[2]] = costs[rs[2]] +math.ceil(rs[3])
-                data["total"] = data["total"] +  math.ceil(rs[3])
-            data["costs"] = costs.items()
-            data["items"] = res.items()
-            max_cost = 0
+            res[rs[0]]["total"] = res[rs[0]]["total"]+math.ceil(rs[3]);
+            res[rs[0]]["total_width"] = int(float(res[rs[0]]["total"]) * 40 / max_total)
+            if rs[2] not in costs :
+                costs[rs[2]] = 0
+            costs[rs[2]] = costs[rs[2]] +math.ceil(rs[3])
+            data["total"] = data["total"] +  math.ceil(rs[3])
+        data["costs"] = costs.items()
+        data["items"] = res.items()
+        max_cost = 0
+        
+        cr.execute( 'SELECT v.license_plate,min(value),max(value), (max(value)-min(value)) km FROM fleet_vehicle_odometer fv,fleet_vehicle v where v.id= fv.vehicle_id  '+_where+' group by v.license_plate  order by km desc')
+        result = cr.fetchall()
+        data["total_km"] = 0
+        max_km = False
+        for rs in result:
+            if not max_km:
+                max_km=int(rs[3])
+            res[rs[0]]["km"]=rs[3]
+            if max_km :
+                res[rs[0]]["km_width"]=int(rs[3]) * 30 / max_km
+            data["total_km"] = data["total_km"] + int(rs[3])
             
-            cr.execute( 'SELECT v.license_plate,min(value),max(value), (max(value)-min(value)) km FROM fleet_vehicle_odometer fv,fleet_vehicle v where v.id= fv.vehicle_id  '+_where+' group by v.license_plate  order by km desc')
-            result = cr.fetchall()
-            data["total_km"] = 0
-            max_km = False
-            for rs in result:
-                if not max_km:
-                    max_km=int(rs[3])
-                res[rs[0]]["km"]=rs[3]
-                if max_km :
-                    res[rs[0]]["km_width"]=int(rs[3]) * 30 / max_km
-                data["total_km"] = data["total_km"] + int(rs[3])
-                
-            for cs in data["costs"]:
-                if cs[1] > max_cost:
-                    max_cost = cs[1]
-                for it in data["items"] :
-                    if cs[0] not in it[1] :
-                        it[1][cs[0]] = 0
-                        it[1][cs[0]+"_width"] = 0
-                    if "km" not in it[1] :
-                        it[1]["km"]=0
-                        it[1]["km_width"]=0
-            data["items"].sort(key=lambda x: x[1][order_by],reverse=True)
-            data["max_costs"] = max_cost
-            data["result"] = True
-        except Exception: 
-            data["result"] = False
+        for cs in data["costs"]:
+            if cs[1] > max_cost:
+                max_cost = cs[1]
+            for it in data["items"] :
+                if cs[0] not in it[1] :
+                    it[1][cs[0]] = 0
+                    it[1][cs[0]+"_width"] = 0
+                if "km" not in it[1] :
+                    it[1]["km"]=0
+                    it[1]["km_width"]=0
+        data["items"].sort(key=lambda x: x[1][order_by],reverse=True)
+        data["max_costs"] = max_cost
+        data["result"] = True
         return data
     
 
